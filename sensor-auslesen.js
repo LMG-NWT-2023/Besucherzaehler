@@ -1,12 +1,16 @@
 var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
 var LED = new Gpio(4, 'out'); //use GPIO pin 4 as output
 var sensor1 = new Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
-var sensor2 = new Gpio(25, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
+// var sensor2 = new Gpio(25, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
+
+var sensor2 = new Gpio(25, 'in', 'both', {debounceTimeout: 1})
+
 var sensor1Value = 0
 var sensor2Value = 0
+var triggeredBy = 'unknown'
 
 function logSensors() {
-    console.log(`${new Date().getUTCMilliseconds()}: Sensor links: ${sensor1Value} - Sensor rechts: ${sensor2Value}`)
+    console.log(`${new Date().getUTCMilliseconds()}: Sensor links: ${sensor1Value} - Sensor rechts: ${sensor2Value} | triggered by ${triggeredBy}`)
 }
 
 sensor1.watch( (err, value) => { //Watch for hardware interrupts on pushButton GPIO, specify callback function
@@ -16,6 +20,7 @@ sensor1.watch( (err, value) => { //Watch for hardware interrupts on pushButton G
   }
 //   console.log(`sensor 1: ${value}`); //turn LED on or off depending on the button state (0 or 1)
   sensor1Value = value
+  triggeredBy = 'left'
   logSensors()
 });
 
@@ -26,6 +31,7 @@ sensor2.watch( (err, value) => {
     } 
     // console.log(`sensor 2: ${value}`)
     sensor2Value = value
+    triggeredBy = 'right'
     logSensors()
 })
 
