@@ -11,28 +11,57 @@ var prevValue1 = 0
 var prevValue2 = 0
 
 var durchlauf = false
+var rückgang = false
 
 var besucherzahl = 0
+var rausgegangen = 0
+
+var durchlaufstart
+var durchlaufende = new Date()
+
+var timeout = true
 
 
 function logSensors() {
   //Funtkion wird nur ausgeführt wenn sich wert ändert 
-  if(sensor1Value == 0 && sensor2Value == 1 && durchlauf == false)
+  if(sensor1Value === 0 && sensor2Value === 1 && !durchlauf && !rückgang && timeout)
   {
+    durchlaufstart = new Date()
+    timeout = false
     durchlauf = true
   }
-
-  if(durchlauf == true && sensor1Value == 0 && sensor2Value == 0)
+  
+  if(durchlauf && sensor1Value === 0 && sensor2Value === 0 && !rückgang)
   {
     durchlauf = false 
-    //Ein vollständiger durchlauf
+    //Ein vollständiger Durchlauf
     besucherzahl ++
-    console.log('Besucher:' + besucherzahl)
-
+    durchlaufende = new Date()
+    setTimeout(()=>{ timeout = true},1000)
+    var kunden = (besucherzahl - rausgegangen)
+    var durchlaufdauer = (durchlaufende.getTime() -durchlaufstart.getTime()) / 1000
+    console.log('Besucher:' + besucherzahl + "     "  + durchlaufdauer+ "   "+ "Im Moment in der Bibliothek:"+ kunden)
   }
-
-    console.log(`${new Date().getUTCMilliseconds()}: Sensor links: ${sensor1Value} - Sensor rechts: ${sensor2Value} }`)
+  
+  if(durchlauf == false && sensor1Value == 1 && sensor2Value == 0 && timeout)
+  {
+    rückgang = true
+    timeout = false
+  }
+  
+  if(rückgang == true && sensor1Value == 0 && sensor2Value == 0)
+  {
+    rückgang = false
+    // Ein vollständieger Rückgang
+    rausgegangen ++
+    setTimeout(()=>{timeout = true},1000)
+    var kunden = (besucherzahl - rausgegangen)
+    console.log("Haben die Bibliothek verlassen:" + rausgegangen+"   "+  "Im Moment in der Bibliothek:"+ kunden)
+  }
+  
+  console.log(`${new Date().getUTCMilliseconds()}: Sensor links: ${sensor1Value} - Sensor rechts: ${sensor2Value} }`)
 }
+
 
 sensor1.watch( (err, value) => { //Watch for hardware interrupts on pushButton GPIO, specify callback function
   if (err) { //if an error
