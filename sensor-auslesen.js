@@ -12,6 +12,8 @@ var prevValue2 = 0
 
 var durchlauf = false
 
+var besucherzahl = 0
+
 
 function logSensors() {
   //Funtkion wird nur ausgeführt wenn sich wert ändert 
@@ -24,7 +26,9 @@ function logSensors() {
   {
     durchlauf = false 
     //Ein vollständiger durchlauf
-    console.log('Durchlauf!")
+    besucherzahl ++
+    console.log('Besucher:' + besucherzahl)
+
   }
 
     console.log(`${new Date().getUTCMilliseconds()}: Sensor links: ${sensor1Value} - Sensor rechts: ${sensor2Value} }`)
