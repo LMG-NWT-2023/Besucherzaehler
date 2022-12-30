@@ -1,16 +1,33 @@
 var Gpio = require('onoff').Gpio //include onoff to interact with the GPIO
 var LED = new Gpio(4, 'out') //use GPIO pin 4 as output
 var sensor1 = new Gpio(17, 'in', 'both') //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
-// var sensor2 = new Gpio(25, 'in', 'both') //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
-
-var sensor2 = new Gpio(25, 'in', 'both', {debounceTimeout: 1})
+var sensor2 = new Gpio(25, 'in', 'both') //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
 
 var sensor1Value = 0
 var sensor2Value = 0
-var triggeredBy = 'unknown'
+//var triggeredBy = 'unknown'
+
+var prevValue1 = 0
+var prevValue2 = 0
+
+var durchlauf = false
+
 
 function logSensors() {
-    console.log(`${new Date().getUTCMilliseconds()}: Sensor links: ${sensor1Value} - Sensor rechts: ${sensor2Value} | triggered by ${triggeredBy}`)
+  //Funtkion wird nur ausgeführt wenn sich wert ändert 
+  if(sensor1Value == 0 && sensor2Value == 1 && durchlauf == false)
+  {
+    durchlauf = true
+  }
+
+  if(durchlauf == true && sensor1Value == 0 && sensor2Value == 0)
+  {
+    durchlauf = false 
+    //Ein vollständiger durchlauf
+    console.log('Durchlauf!")
+  }
+
+    console.log(`${new Date().getUTCMilliseconds()}: Sensor links: ${sensor1Value} - Sensor rechts: ${sensor2Value} }`)
 }
 
 sensor1.watch( (err, value) => { //Watch for hardware interrupts on pushButton GPIO, specify callback function
@@ -21,7 +38,12 @@ sensor1.watch( (err, value) => { //Watch for hardware interrupts on pushButton G
 //   console.log(`sensor 1: ${value}`) //turn LED on or off depending on the button state (0 or 1)
   sensor1Value = value
   triggeredBy = 'left'
-  logSensors()
+  if(sensor1Value != prevValue1)
+  {
+    logSensors()
+  }
+
+  prevValue1 = value
 })
 
 sensor2.watch( (err, value) => {
@@ -32,15 +54,22 @@ sensor2.watch( (err, value) => {
     // console.log(`sensor 2: ${value}`)
     sensor2Value = value
     triggeredBy = 'right'
-    logSensors()
+    if(sensor2Value != prevValue2)
+    {
+      logSensors()
+    }
+    
+    prevValue2 = value
 })
+
+
 
 function unexportOnClose() { //function to run when exiting program
   //LED.writeSync(0) // Turn LED off
   // LED.unexport() // Unexport LED GPIO to free resources
   sensor1.unexport() // Unexport Button GPIO to free resources
   sensor2.unexport()
-  console.log('sensor auslesen beenden')
+  console.log('sensor auslesen beendet')
 }
 
 process.on('SIGINT', unexportOnClose) //function to run when user closes using ctrl+c
