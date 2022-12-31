@@ -1,11 +1,12 @@
 var Gpio = require('onoff').Gpio //include onoff to interact with the GPIO
 var LED = new Gpio(4, 'out') //use GPIO pin 4 as output
 var sensor1 = new Gpio(17, 'in', 'both') //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
-var sensor2 = new Gpio(25, 'in', 'both') //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
+var sensor2 = new Gpio(25, 'in', 'both') //use GPIO pin 25 as input, and 'both' button presses, and releases should be handled
 
+
+//1 wenn Sensor etwas erfasst, 0 wenn Sensor nichts erfasst
 var sensor1Value = 0
 var sensor2Value = 0
-//var triggeredBy = 'unknown'
 
 var prevValue1 = 0
 var prevValue2 = 0
@@ -14,6 +15,7 @@ var durchlauf = false
 var rückgang = false
 
 var besucherzahl = 0
+var momentaneKunden = 0
 var rausgegangen = 0
 
 var durchlaufstart
@@ -22,41 +24,56 @@ var durchlaufende = new Date()
 var timeout = true
 
 
+ //Funktion wenn sich ein Wert der Sensoren ändert
 function logSensors() {
-  //Funtkion wird nur ausgeführt wenn sich wert ändert 
+
+  //Erkennt Anfang von einem Eingang wenn alles wieder in Ausgangsposition ist
   if(sensor1Value === 0 && sensor2Value === 1 && !durchlauf && !rückgang && timeout)
   {
     durchlaufstart = new Date()
     timeout = false
     durchlauf = true
   }
+
   
+  //Wenn eine Person von Außen nach Innen gegangen ist
   if(durchlauf && sensor1Value === 0 && sensor2Value === 0 && !rückgang)
   {
     durchlauf = false 
-    //Ein vollständiger Durchlauf
     besucherzahl ++
+
     durchlaufende = new Date()
-    setTimeout(()=>{ timeout = true},1000)
-    var kunden = (besucherzahl - rausgegangen)
+
+    setTimeout(() => {timeout = true}, 1000)
+
+    momentaneKunden = (besucherzahl - rausgegangen)
     var durchlaufdauer = (durchlaufende.getTime() -durchlaufstart.getTime()) / 1000
-    console.log('Besucher:' + besucherzahl + "     "  + durchlaufdauer+ "   "+ "Im Moment in der Bibliothek:"+ kunden)
+
+    //Zeigt Besucherzahl, Kunden im Moment und Durchlaufdauer an
+    console.log('Besucher: ' + besucherzahl + '   ' + 'Im Moment in der Bibliothek: ' + momentaneKunden + '   ' + 'Durchlaufdauer: ' + durchlaufdauer)
+
+    //Jetzt ist ein vollständiger Durchgang beendet
   }
-  
-  if(durchlauf == false && sensor1Value == 1 && sensor2Value == 0 && timeout)
+
+
+  //Erkennt Anfang von einem Ausgang wenn alles wieder in Ausgangsposition ist
+  if(!durchlauf && sensor1Value == 1 && sensor2Value == 0 && timeout)
   {
     rückgang = true
     timeout = false
   }
   
-  if(rückgang == true && sensor1Value == 0 && sensor2Value == 0)
+
+  //Wenn eine Person von Innen nach Außen gegangen ist
+  if(rückgang && sensor1Value == 0 && sensor2Value == 0)
   {
     rückgang = false
-    // Ein vollständieger Rückgang
     rausgegangen ++
-    setTimeout(()=>{timeout = true},1000)
-    var kunden = (besucherzahl - rausgegangen)
-    console.log("Haben die Bibliothek verlassen:" + rausgegangen+"   "+  "Im Moment in der Bibliothek:"+ kunden)
+
+    setTimeout(() => {timeout = true}, 1000)
+
+    momentaneKunden = (besucherzahl - rausgegangen)
+    console.log('Haben die Bibliothek verlassen: ' + rausgegangen + '   ' + 'Im Moment in der Bibliothek: ' + momentaneKunden)
   }
   
   console.log(`${new Date().getUTCMilliseconds()}: Sensor links: ${sensor1Value} - Sensor rechts: ${sensor2Value} }`)
@@ -64,13 +81,16 @@ function logSensors() {
 
 
 sensor1.watch( (err, value) => { //Watch for hardware interrupts on pushButton GPIO, specify callback function
-  if (err) { //if an error
+
+  if(err) 
+  { 
+    //if an error
     console.error('There was an error', err) //output error message to console
-  return
+    return
   }
-//   console.log(`sensor 1: ${value}`) //turn LED on or off depending on the button state (0 or 1)
+
   sensor1Value = value
-  triggeredBy = 'left'
+
   if(sensor1Value != prevValue1)
   {
     logSensors()
@@ -80,13 +100,15 @@ sensor1.watch( (err, value) => { //Watch for hardware interrupts on pushButton G
 })
 
 sensor2.watch( (err, value) => {
-    if (err) {
+
+    if(err) 
+    {
         console.error(err)
         return
     } 
-    // console.log(`sensor 2: ${value}`)
+
     sensor2Value = value
-    triggeredBy = 'right'
+
     if(sensor2Value != prevValue2)
     {
       logSensors()
@@ -96,8 +118,9 @@ sensor2.watch( (err, value) => {
 })
 
 
-
-function unexportOnClose() { //function to run when exiting program
+function unexportOnClose() 
+{
+  //function to run when exiting program
   //LED.writeSync(0) // Turn LED off
   // LED.unexport() // Unexport LED GPIO to free resources
   sensor1.unexport() // Unexport Button GPIO to free resources
