@@ -1,12 +1,14 @@
 # GPIO Eins Beispiel
 
-Einfachen Beispielprojekt, um mit node.js den GPIO-Pins auf den raspberry pi zu programmieren. 
+Einfaches Beispiel, um mit node.js die GPIO-Pins auf dem Raspberry Pi zu programmieren. 
 
 Um alle node Module local zu installieren, führe folgenden Befehl aus:
 
 ```
 npm install
 ```
+
+Die Anleitung, wie das Betriebssystem für den Raspberry Pi aufgesetzt findet sich in einer eigenen: [Anleitung](setup.md)
 
 ## Installation ESLint
 
