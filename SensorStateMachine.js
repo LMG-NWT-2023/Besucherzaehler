@@ -12,15 +12,12 @@ const States = {
     ERROR: "ERROR",
 }
 exports.States = States
-var myState = States.S0
-console.log(myState)
-
 class StateMachine {
     state = States.S0
     besucher = 0
 
     log() {
-        console.log(this.state)
+        console.log(`SensorStateMachine.state: ${this.state} - Besucher: ${this.besucher}`)
     }
 
     input(newValues) {
@@ -77,6 +74,7 @@ exports.StateMachine = StateMachine
 // Besucher betritt den Raum 
 
 const stateMachine = new StateMachine()
+stateMachine.log()
 
 stateMachine.input({ Sensor1: 0, Sensor2: 1 })
 stateMachine.input({ Sensor1: 1, Sensor2: 1 })
