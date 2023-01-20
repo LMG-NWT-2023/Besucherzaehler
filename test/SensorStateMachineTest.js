@@ -2,10 +2,81 @@ const assert = require('assert')
 const {States, StateMachine} = require('../SensorStateMachine')
 
 describe('SendorStateMachine', function () {
-  describe('initialize', function () {
-    it('should start with initial State S0', () => {
-      const stateMachine = new StateMachine()
-      assert.equal(stateMachine.state, States.S0)
-    })
+  it('soll mit dem initialen Zustand State S0 beginnen', () => {
+    const stateMachine = new StateMachine()
+    assert.equal(stateMachine.state, States.S0)
   })
+  it('soll einen eintretenden Besucher erkennen', ()=> {
+    const stateMachine = new StateMachine()
+
+    assert.equal(stateMachine.besucher(), 0)
+    stateMachine.input({ Sensor1: 0, Sensor2: 1 })
+    assert.equal(stateMachine.state, States.E1)
+    stateMachine.input({ Sensor1: 1, Sensor2: 1 })
+    assert.equal(stateMachine.state, States.E2)
+    stateMachine.input({ Sensor1: 1, Sensor2: 0 })
+    assert.equal(stateMachine.state, States.E3)
+    stateMachine.input({ Sensor1: 0, Sensor2: 0 })
+    assert.equal(stateMachine.state, States.S0)
+    assert.equal(stateMachine.besucher(), 1)
+  })
+  it('soll einen austretenden Besucher erkennen', ()=> {
+    const stateMachine = new StateMachine()
+
+    assert.equal(stateMachine.besucher(), 0)
+
+    stateMachine.input({ Sensor1: 1, Sensor2: 0 })
+    assert.equal(stateMachine.state, States.A1)
+    stateMachine.input({ Sensor1: 1, Sensor2: 1 })
+    assert.equal(stateMachine.state, States.A2)
+    stateMachine.input({ Sensor1: 0, Sensor2: 1 })
+    assert.equal(stateMachine.state, States.A3)
+    stateMachine.input({ Sensor1: 0, Sensor2: 0 })
+    assert.equal(stateMachine.state, States.S0)
+    assert.equal(stateMachine.besucher(), -1)
+  })
+
+  it('soll erkennen wenn ein eintretender Besucher IN der Tür umdreht', () => {
+    const stateMachine = new StateMachine()
+
+    assert.equal(stateMachine.besucher(), 0)
+    stateMachine.input({ Sensor1: 0, Sensor2: 1 })
+    stateMachine.input({ Sensor1: 1, Sensor2: 1 })
+    stateMachine.input({ Sensor1: 0, Sensor2: 1 })
+    stateMachine.input({ Sensor1: 0, Sensor2: 0 })
+    assert.equal(stateMachine.besucher(), 0)
+    assert.equal(stateMachine.state, States.S0)
+  })
+  it('soll erkennen wenn ein eintretender Besucher VOR der Tür umdreht', () => {
+    const stateMachine = new StateMachine()
+
+    assert.equal(stateMachine.besucher(), 0)
+    stateMachine.input({ Sensor1: 0, Sensor2: 1 })
+    stateMachine.input({ Sensor1: 0, Sensor2: 0 })
+    assert.equal(stateMachine.besucher(), 0)
+    assert.equal(stateMachine.state, States.S0)
+  })
+  it('soll erkennen wenn ein austretender Besucher IN der Tür umdreht', () => {
+    const stateMachine = new StateMachine()
+
+    assert.equal(stateMachine.besucher(), 0)
+    stateMachine.input({ Sensor1: 1, Sensor2: 0 })
+    stateMachine.input({ Sensor1: 1, Sensor2: 1 })
+    stateMachine.input({ Sensor1: 1, Sensor2: 0 })
+    stateMachine.input({ Sensor1: 0, Sensor2: 0 })
+    assert.equal(stateMachine.besucher(), 0)
+    assert.equal(stateMachine.state, States.S0)
+  })
+  it('soll erkennen wenn ein austretender Besucher VOR der Tür umdreht', () => {
+    const stateMachine = new StateMachine()
+
+    assert.equal(stateMachine.besucher(), 0)
+    stateMachine.input({ Sensor1: 1, Sensor2: 0 })
+    stateMachine.input({ Sensor1: 0, Sensor2: 0 })
+    assert.equal(stateMachine.besucher(), 0)
+    assert.equal(stateMachine.state, States.S0)
+  })
+
 }) 
+
+
