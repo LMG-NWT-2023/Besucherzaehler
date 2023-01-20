@@ -38,3 +38,39 @@ Vcc:    2 (Stromversorgung)
 GND:    20 (Ground)
 Vo:     22 (GPIO 25)
 ```
+
+
+## Unit Tests hinzufügen
+
+### Test-Modul `mocha` installieren
+
+```
+npm install mocha --save-dev
+```
+
+Das installiert das Modul und schreibt die Abhängigkeit in die Datei `package.json` - in den Bereich `"devDependencies"`. Das bedeutet, dieses Modul ist nur zur Entwicklungszeit relevant. 
+
+### Ersten Unit-Test erstellen
+
+Dazu legen wir das Verzeichnis `test` an und erstellen dort die Datei `SendorStateMachineTest.js`: 
+
+```
+const assert = require('assert')
+const {States, StateMachine} = require('../SensorStateMachine')
+
+describe('SendorStateMachine', function () {
+  describe('initialize', function () {
+    it('should start with initial State S0', () => {
+      const stateMachine = new StateMachine()
+      assert.equal(stateMachine.state, States.S0)
+    })
+  })
+}) 
+````
+
+Jetzt können wir den Test im Terminal ausführen: 
+
+```
+npx mocha
+```
+ 
