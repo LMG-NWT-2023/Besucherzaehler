@@ -12,7 +12,7 @@ const States = {
     ERROR: "ERROR",
 }
 exports.States = States
-class StateMachine
+class SensorStateMachine
 {
     state = States.S0
     ausgetreten = 0
@@ -116,7 +116,7 @@ class StateMachine
         // this.log()
     }
 }
-exports.StateMachine = StateMachine
+exports.SensorStateMachine = SensorStateMachine
 
 
 // Besucher betritt den Raum 
