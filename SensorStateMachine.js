@@ -1,10 +1,7 @@
 
 // Die möglichen Zustände - damit wir beim Entwickeln eine ordenliche Code-Completion Unterstützung bekommen. 
 
-const m_Inputs = "a"
 
-var verlassen = 0;
-var besucher
 
 const States = {
     S0: "S0",
@@ -20,13 +17,16 @@ exports.States = States
 class StateMachine
 {
     state = States.S0
+    augetreten = 0
+    eingetreten = 0
 
     log() {
-        console.log(`SensorStateMachine.state: ${this.state} - Besucher: ${this.besucher}`)
+        console.log(`SensorStateMachine.state: ${this.state} - eingetreten: ${this.eingetreten} - ausgetreten: ${this.augetreten}`)
    }
 
     input(newValues)
      {
+        var m_Inputs = "a"
         if(newValues.Sensor1 === 0 && newValues.Sensor2 === 0)
         {
             m_Inputs = ("a")
@@ -39,7 +39,7 @@ class StateMachine
         {
             m_Inputs = ("c")
         }
-        else if(newValues.Sensor1 === 0 && newValues.Sensor === 1)
+        else if(newValues.Sensor1 === 0 && newValues.Sensor2 === 1)
         {
             m_Inputs = ("d")
         }
@@ -74,17 +74,17 @@ class StateMachine
                 if (m_Inputs === ("a"))
                 {
                     this.state = States.S0	
-                    verlassen --;
+                    this.augetreten++
                 }
                 break
 
             case States.S0:
 
-                if(m_Input === ("b"))
+                if(m_Inputs === ("b"))
                 {
                     this.state = States.A1
                 } 
-                else if(m_Input === ("d")) 
+                else if(m_Inputs === ("d")) 
                 {
                     this.state = States.E1
                 }
@@ -92,34 +92,34 @@ class StateMachine
 
             case States.E1:
 
-                if(m_Input === ("c"))
+                if(m_Inputs === ("c"))
                 {
                     this.state = States.E2
                 }
                 else if(m_Inputs === ("a") || m_Inputs === ("b"))
                 {
-                    this.state = State.S0
+                    this.state = States.S0
                 }
                 break
 
             case States.E2:
 
-            if(m_Input === ("b"))
+            if(m_Inputs === ("b"))
             {
-                this.state = State.E3
+                this.state = States.E3
             }
             else if(m_Inputs === ("a") || m_Inputs === ("d"))
             {
-                this.state = State.S0
+                this.state = States.S0
             }
             break
 
             case States.E3: 
 
-            if(m_Input === ("a"))
+            if(m_Inputs === ("a"))
             {
-                this.state = State.S0
-                besucher ++
+                this.state = States.S0
+                this.eingetreten++
             }
             break
 
@@ -144,6 +144,9 @@ stateMachine.input({ Sensor1: 0, Sensor2: 0 })
 // jetzt sollte Besucher eins mehr sein
 
 // Besucher verläßt den Raum
-
+stateMachine.input({ Sensor1: 1, Sensor2: 0 })
+stateMachine.input({ Sensor1: 1, Sensor2: 1 })
+stateMachine.input({ Sensor1: 0, Sensor2: 1 })
+stateMachine.input({ Sensor1: 0, Sensor2: 0 })
 // Besucher dreht beim Betreten um
 
