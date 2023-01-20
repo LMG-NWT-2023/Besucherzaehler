@@ -9,6 +9,12 @@
             "request": "launch",
             "name": "Launch StateMachine",
             "program": "${workspaceFolder}/SensorStateMachine.js"
+        }, 
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch mocha tests",
+            "program": "${workspaceFolder}/node_modules/.bin/mocha"
         }
     ]
 }
