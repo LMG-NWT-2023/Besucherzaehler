@@ -25,16 +25,30 @@ Bestell-Nr.: 1318255 - 62
 [Datenblatt](https://asset.conrad.com/media10/add/160267/c1/-/en/001318255DS01/datenblatt-1318255-joy-it-infrarot-abstandssensor-raspberry-pi-erweiterungs-platine-passend-fuer-einplatinen-computer-arduino-banana-pi.pdf)
 
 ```
-Belegung: 
+Belegung Sensorpaar 1: 
 Sensor links:
 Boardnummer:
 Vcc:    4 (Stromversorgung)
-Vo:     11 (GPIO 17)
 GND:    9 (Ground)
+Vo:     11 (GPIO 17)
 
 Sensor rechts
 Boardnummer:
 Vcc:    2 (Stromversorgung)
 GND:    20 (Ground)
 Vo:     22 (GPIO 25)
+```
+```
+Belegung Sensorpaar 2: 
+Sensor links:
+Boardnummer:
+Vcc:    4 (Stromversorgung) (rot)
+GND:    9 (Ground)(schwarz)
+Vo:     11 (GPIO 17)(gelb)
+
+Sensor rechts
+Boardnummer:
+Vcc:    2 (Stromversorgung)(rot)
+GND:    20 (Ground)(baun)
+Vo:     22 (GPIO 25)(orange)
 ```
