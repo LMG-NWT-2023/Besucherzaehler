@@ -34,7 +34,7 @@ class SensorStateMachine {
 
 
     log() {
-        console.log(`SensorStateMachine.state: ${this.state} - eingetreten: ${this.eingetreten} - ausgetreten: ${this.ausgetreten}`)
+        console.log(`SensorStateMachine.state: ${this.state} - eingetreten: ${this.eingetreten} - ausgetreten: ${this.ausgetreten} - besucher: ${this.besucher()}`)
     }
 
     input(newValues) {
@@ -138,7 +138,7 @@ class SensorStateMachine {
                 this.state = States.ERROR
                 break
         }
-        // this.log()
+        this.log()
     }
 }
 exports.SensorStateMachine = SensorStateMachine
