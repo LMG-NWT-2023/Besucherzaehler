@@ -17,7 +17,7 @@ describe('SendorStateMachine', function () {
     stateMachine.input({ Sensor1: 1, Sensor2: 0 })
     assert.equal(stateMachine.state, States.E3)
     stateMachine.input({ Sensor1: 0, Sensor2: 0 })
-    assert.equal(stateMachine.state, States.S0)
+    assert.equal(stateMachine.state, States.E4)
     assert.equal(stateMachine.besucher(), 1)
   })
   it('soll einen austretenden Besucher erkennen', ()=> {
@@ -32,7 +32,7 @@ describe('SendorStateMachine', function () {
     stateMachine.input({ Sensor1: 0, Sensor2: 1 })
     assert.equal(stateMachine.state, States.A3)
     stateMachine.input({ Sensor1: 0, Sensor2: 0 })
-    assert.equal(stateMachine.state, States.S0)
+    assert.equal(stateMachine.state, States.A4)
     assert.equal(stateMachine.besucher(), -1)
   })
 

@@ -81,6 +81,7 @@ class SensorStateMachine {
                 if (m_Inputs === "0;0") {
                     this.state = States.A4
                     this.messungBeginnen()
+                    this.ausgetreten++
                 }
                 break
 
@@ -119,8 +120,9 @@ class SensorStateMachine {
             case States.E3:
 
                 if (m_Inputs === "0;0") {
-                    this.state = States.S0
+                    this.state = States.E4
                     this.messungBeginnen()
+                    this.eingetreten++
                 }
                 break
 
