@@ -14,8 +14,7 @@ const States = {
     ERROR: "ERROR",
 }
 exports.States = States
-class SensorStateMachine
-{
+class SensorStateMachine {
     state = States.S0
     ausgetreten = 0
     eingetreten = 0
@@ -24,78 +23,70 @@ class SensorStateMachine
     besucher() {
         return this.eingetreten - this.ausgetreten
     }
-    messungBeginnen(){
+    messungBeginnen() {
         this.startDerMessung = (new Date()).getTime()
     }
 
-    istAuszeitVorbei(){
+    istAuszeitVorbei() {
         const now = new Date()
-        return(now.getTime()  - this.startDerMessung > 1000)
+        return (now.getTime() - this.startDerMessung > 1000)
     }
 
 
     log() {
         console.log(`SensorStateMachine.state: ${this.state} - eingetreten: ${this.eingetreten} - ausgetreten: ${this.ausgetreten}`)
-   }
+    }
 
-    input(newValues)
-     {
-        const index = newValues.Sensor1*1 + newValues.Sensor2*2
+    input(newValues) {
+        const index = newValues.Sensor1 * 1 + newValues.Sensor2 * 2
         const m_Inputs = ["0;0", "1;0", "0;1", "1;1"][index]
 
         switch (this.state) {
             case States.S0:
-    
-                if(m_Inputs === ("1;0"))
-                {
+
+                if (m_Inputs === ("1;0")) {
                     this.state = States.A1
-                } 
-                else if(m_Inputs === ("0;1")) 
-                {
+                }
+                else if (m_Inputs === ("0;1")) {
                     this.state = States.E1
                 }
                 break
             case States.A1:
 
                 //Cases für Verlassensprozess
-                if(m_Inputs === ("1;1"))
-                {
+                if (m_Inputs === ("1;1")) {
                     this.state = States.A2
                 }
-                else if(m_Inputs === ("0;0") || m_Inputs === ("0;1"))
-                {
+                else if (m_Inputs === ("0;0") || m_Inputs === ("0;1")) {
                     this.state = States.S0
-                } 
+                }
                 break
 
             case States.A2:
 
-                if(m_Inputs === ("0;1")) 
-                {
+                if (m_Inputs === ("0;1")) {
                     this.state = States.A3
-                } 
-                else if(m_Inputs === ("0;0") ){
+                }
+                else if (m_Inputs === ("0;0")) {
                     this.state = States.S0
                 }
                 // Wackler - wir bleiben im Zustand A2
-                else if(m_Inputs === ("1;0") ){
+                else if (m_Inputs === ("1;0")) {
                     this.state = States.A2
                 }
                 break
 
             case States.A3:
 
-                if(m_Inputs === ("0;0"))
-                {
-                    this.state = States.A4	
+                if (m_Inputs === ("0;0")) {
+                    this.state = States.A4
                     this.messungBeginnen()
                 }
                 break
 
             case States.A4:
 
-                if(this.istAuszeitVorbei())
-                {
+                if (this.istAuszeitVorbei()) {
                     this.state = States.S0
                     this.input(newValues)
                 }
@@ -103,48 +94,43 @@ class SensorStateMachine
 
             case States.E1:
 
-                if(m_Inputs === ("1;1"))
-                {
+                if (m_Inputs === ("1;1")) {
                     this.state = States.E2
                 }
-                else if(m_Inputs === ("0;0") || m_Inputs === ("1;0"))
-                {
+                else if (m_Inputs === ("0;0") || m_Inputs === ("1;0")) {
                     this.state = States.S0
                 }
                 break
 
             case States.E2:
 
-            if(m_Inputs === ("1;0"))
-            {
-                this.state = States.E3
-            }
-            else if(m_Inputs === ("0;0"))
-            {
-                this.state = States.S0
-            }
-            // Wackler - wir bleiben im Zustand E2
-            else if(m_Inputs === ("0;1") ){
-                this.state = States. E2
-            }
-            break
+                if (m_Inputs === ("1;0")) {
+                    this.state = States.E3
+                }
+                else if (m_Inputs === ("0;0")) {
+                    this.state = States.S0
+                }
+                // Wackler - wir bleiben im Zustand E2
+                else if (m_Inputs === ("0;1")) {
+                    this.state = States.E2
+                }
+                break
 
-            case States.E3: 
+            case States.E3:
 
-            if(m_Inputs === ("0;0")) {
-                this.state = States.S0
-                this.messungBeginnen()
-            }
-            break
+                if (m_Inputs === ("0;0")) {
+                    this.state = States.S0
+                    this.messungBeginnen()
+                }
+                break
 
             case States.E4:
 
-            if(this.istAuszeitVorbei())
-            {
-                this.state = States.S0
-                this.input(newValues)
-            }
-            break
+                if (this.istAuszeitVorbei()) {
+                    this.state = States.S0
+                    this.input(newValues)
+                }
+                break
 
             default:
                 this.state = States.ERROR
