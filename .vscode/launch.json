@@ -14,7 +14,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch mocha tests",
-            "program": "${workspaceFolder}/node_modules/.bin/mocha"
+            "program": "${workspaceFolder}/node_modules/mocha/bin/mocha.js"
         }
     ]
 }
