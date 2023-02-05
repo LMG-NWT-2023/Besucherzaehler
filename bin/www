@@ -7,6 +7,8 @@
 var app = require('../app')
 var http = require('http')
 
+var os = require("os");
+
 /**
  * Get port from environment and store in Express.
  */
@@ -86,5 +88,15 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : `${addr.address}:${addr.port}`
-  console.log('Listening on ' + bind)
+  const hostname = os.hostname()
+  var linkWithHostname = ''
+  if (hostname.match(/.*\..*/)) {
+    // hostname contains already domain info
+    linkWithHostname = `http://${hostname}:${port}`
+  }  else {
+    linkWithHostname = `http://${hostname}.local:${port}`
+
+  }
+  var linkWithLocalhost = `http://localhost:${port}`
+  console.log(`Listening on ${bind} - ${linkWithLocalhost} - ${linkWithHostname}`)
 }
