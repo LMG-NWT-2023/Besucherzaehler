@@ -90,3 +90,15 @@ Jetzt können wir den Test im Terminal ausführen:
 npx mocha
 ```
  
+## Git cheatsheet
+Wenn in einem localen Verzeichnis des Git Reposetories eine Datei verändert wurde, kann man kein `git pull` machen, da sonst die Änderung überschrieben werden würde. Es gibt drei Möglichkeiten:
+
+* die geänderte Datei in einen Commit packen
+* die Änderung stashen (die Änderung auf einen Stapel legen)
+* die Änderung verwerfen ( discard changes, auf dem Raspberry Pi: `git checkout routes/index.js`)
+
+Auf dem Raspi Dateien verschiben:
+`mv gpio-eins gpio-eins.bak`
+
+Danach eine neue Datei clonen:
+`git clone URL aus Github`
