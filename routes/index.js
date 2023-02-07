@@ -3,7 +3,12 @@ var router = express.Router()
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Besucherzähler' })
+  const model = { 
+    title: 'Besucherzähler',
+    besucher: 25
+
+  }
+  res.render('index', model)
 })
 
 module.exports = router

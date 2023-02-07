@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+.besucherZahl {
+  font-size: larger;
+  color: #ff00f2;
+}
+body {background-color: rgb(0, 255, 213);}

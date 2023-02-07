@@ -102,3 +102,10 @@ Auf dem Raspi Dateien verschiben:
 
 Danach eine neue Datei clonen:
 `git clone URL aus Github`
+
+## html
+Hilfreiche Seiten:
+
+[selfhtml](https://wiki.selfhtml.org/wiki/SELFHTML)
+
+[W3schools](https://www.w3schools.com/)
