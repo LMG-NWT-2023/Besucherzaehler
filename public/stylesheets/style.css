@@ -10,10 +10,13 @@ a {
 
 .banner {
     font-size: 40px;
-    color: #FFFFFF;
+    color: white;
+    text-shadow: 0 0 20px black;
+
     margin: auto;
     background: rgb(255, 81, 0);
-    background: linear-gradient(25deg, rgba(153,0,255,1) 0%, rgba(253,29,29,1) 50%, rgba(255,174,60,1) 100%);
+    background: linear-gradient(25deg, rgb(153,0,255) 0%, rgb(253,29,29) 50%, rgb(255,174,60) 100%);
+
     padding: 50px;
     position: fixed;
     right: 0;
@@ -28,6 +31,8 @@ a {
 }
 
 .subText {
+    word-spacing: 7px;
+    font-family: "Calibri Light", "Courier New", monospace;
     position: relative;
     z-index: -1;
     top: -50px;
