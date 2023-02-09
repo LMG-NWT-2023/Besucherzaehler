@@ -1,13 +1,55 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
 }
 
 a {
   color: #00B7FF;
 }
-.besucherZahl {
-  font-size: larger;
-  color: #ff00f2;
+
+.banner {
+    font-size: 40px;
+    color: #FFFFFF;
+    margin: auto;
+    background: linear-gradient(to right, #4aebff, #0045e4);
+    padding: 50px;
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
 }
-body {background-color: rgb(0, 255, 213);}
+
+.besucherZahl {
+    padding: 160px 0 0;
+    font-weight: 600;
+    font-size: 70px;
+}
+
+.subText {
+    position: relative;
+    z-index: -1;
+    top: -50px;
+    font-size: 20px;
+}
+
+.watermark {
+    background-color: white;
+    padding: 20px;
+
+    margin: auto;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    color: #7c7c7c;
+}
+
+#object1 {
+    position: fixed;
+
+    bottom: 10px;
+    right: 10px;
+    width: 150px;
+}
