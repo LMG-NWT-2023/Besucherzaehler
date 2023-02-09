@@ -3,10 +3,12 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <img src="/images/lmg.png" alt="LMG Logo">
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p class="besucherZahl">Anzahl der Besucher: <%= besucher%></p>
+    <h1 class="banner"><%= title %></h1>
+    <p class="besucherZahl">Besucher: <%= besucher%></p>
+    <pre class="subText">momentene Besucher: <%= momentan%>   ausgetreten: <%= ausgetreten%></pre>
+    <p class="watermark">DaVaVi GmbH &#169; - 2023</p>
+    <img id="object1" src="/images/lmg.png" alt="LMG Logo">
   </body>
 </html>
