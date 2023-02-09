@@ -12,7 +12,8 @@ a {
     font-size: 40px;
     color: #FFFFFF;
     margin: auto;
-    background: linear-gradient(to right, #4aebff, #0045e4);
+    background: rgb(255, 81, 0);
+    background: linear-gradient(25deg, rgba(153,0,255,1) 0%, rgba(253,29,29,1) 50%, rgba(255,174,60,1) 100%);
     padding: 50px;
     position: fixed;
     right: 0;
