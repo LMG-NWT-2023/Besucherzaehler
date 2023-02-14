@@ -20,7 +20,15 @@ class SensorStateMachine {
     eingetreten = 0
     startDerMessung = 0
 
-    besucher() {
+    aktuellerStand() {
+        return {
+            momentan: this.eingetreten-this.ausgetreten,
+            besucher: this.eingetreten, 
+            ausgetreten: this.ausgetreten
+        }
+    }
+
+    momentan() {
         return this.eingetreten - this.ausgetreten
     }
     messungBeginnen() {
@@ -34,7 +42,7 @@ class SensorStateMachine {
 
 
     log() {
-        console.log(`SensorStateMachine.state: ${this.state} - eingetreten: ${this.eingetreten} - ausgetreten: ${this.ausgetreten} - besucher: ${this.besucher()}`)
+        console.log(`SensorStateMachine.state: ${this.state} - eingetreten: ${this.eingetreten} - ausgetreten: ${this.ausgetreten} - besucher: ${this.momentan()}`)
     }
 
     input(newValues) {

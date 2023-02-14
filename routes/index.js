@@ -3,8 +3,8 @@ var router = express.Router()
 var besucherZaehler = undefined
 
 var defaultModel = {
-  besucher: 4,
-  momentan: 7, 
+  besucher: 7,
+  momentan: 4, 
   ausgetreten: 3
 }
 /* GET home page. */
@@ -13,4 +13,9 @@ router.get('/', function(req, res, next) {
   res.render('index', model)
 })
 
-module.exports = router
+function setBesucherZaehler(neuerBesucherZaehler) {
+  besucherZaehler = neuerBesucherZaehler
+}
+
+module.exports.router = router
+module.exports.setBesucherZaehler = setBesucherZaehler
