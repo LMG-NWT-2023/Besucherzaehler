@@ -24,6 +24,12 @@ app.set('port', port)
 var server = http.createServer(app)
 
 /**
+ * web socket connection
+ */
+const io = require('socket.io')(server)
+app.setBesucherZaehlerIO(io)
+
+/**
  * Listen on provided port, on all network interfaces.
  */
 

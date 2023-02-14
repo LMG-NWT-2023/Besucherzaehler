@@ -23,6 +23,8 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use('/socket.io/', express.static(path.join(__dirname, 'node_modules/socket.io/client-dist')))
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter.router)
@@ -43,5 +45,25 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500)
   res.render('error')
 })
+
+// WebSockets
+var io
+app.setBesucherZaehlerIO = (socketIO) => {
+  if (socketIO === undefined) {
+    console.log('noch kein SocketIO verfügbar')
+    return
+  }
+
+  io = socketIO
+  io.on('connection', () => { 
+    console.log("WebSocket connection!")
+    besucherZaehler.sendeAktuellenStand()
+   });  
+
+   if (besucherZaehler) {
+    console.log('Besucherzäher ist schon instanziiert und bekommt die socketIO-Instanz')
+    besucherZaehler.setSocketIO(io)
+   }
+}
 
 module.exports = app
