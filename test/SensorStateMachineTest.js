@@ -76,6 +76,30 @@ describe('SendorStateMachine', function () {
     assert.equal(stateMachine.momentan(), 0)
     assert.equal(stateMachine.state, States.S0)
   })
+  describe('Änderungs-Event', () => {
+    it('soll mich benachtichtigen wenn sich der Wert ändert', () => {
+      var wurdeGerufen = false
+      const stateMachine = new SensorStateMachine()
+
+      assert.equal(stateMachine.momentan(), 0)
+
+      stateMachine.onChange((aktuellerStand) => {
+        wurdeGerufen = true
+        assert.equal(stateMachine.state, States.E4)
+        assert.equal(aktuellerStand.momentan, 1)
+        assert.equal(aktuellerStand.besucher, 1)
+        assert.equal(aktuellerStand.ausgetreten, 0)
+      })
+
+      stateMachine.input({ Sensor1: 0, Sensor2: 1 })
+      stateMachine.input({ Sensor1: 1, Sensor2: 1 })
+      stateMachine.input({ Sensor1: 1, Sensor2: 0 })
+      stateMachine.input({ Sensor1: 0, Sensor2: 0 })
+
+      assert.ok(wurdeGerufen)
+    })
+  })
+
 }) 
 
 

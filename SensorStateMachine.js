@@ -45,6 +45,23 @@ class SensorStateMachine {
         console.log(`SensorStateMachine.state: ${this.state} - eingetreten: ${this.eingetreten} - ausgetreten: ${this.ausgetreten} - besucher: ${this.momentan()}`)
     }
 
+    onChange( callback) {
+        this.onChangeCallback = callback
+    }
+
+    incrEingetreten() {
+        this.eingetreten++
+        if(this.onChangeCallback) {
+            this.onChangeCallback(this.aktuellerStand())
+        }
+    }
+
+    incrAusgetreten() {
+        this.ausgetreten++
+        if(this.onChangeCallback) {
+            this.onChangeCallback(this.aktuellerStand())
+        }
+    }
     input(newValues) {
         const index = newValues.Sensor1 * 1 + newValues.Sensor2 * 2
         const m_Inputs = ["0;0", "1;0", "0;1", "1;1"][index]
@@ -89,7 +106,7 @@ class SensorStateMachine {
                 if (m_Inputs === "0;0") {
                     this.state = States.A4
                     this.messungBeginnen()
-                    this.ausgetreten++
+                    this.incrAusgetreten()
                 }
                 break
 
@@ -130,7 +147,7 @@ class SensorStateMachine {
                 if (m_Inputs === "0;0") {
                     this.state = States.E4
                     this.messungBeginnen()
-                    this.eingetreten++
+                    this.incrEingetreten()
                 }
                 break
 
