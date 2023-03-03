@@ -86,6 +86,13 @@ class BesucherZaehler{
             sensorStateMachine.onChange( (zaehlerStand)=> {
                 console.log(`neuer Zählerstand: ${zaehlerStand.besucher}`)
                 this.socketIO.emit('BesucherZaehler', zaehlerStand)
+                // schreibe Aktuellen Stand in Datei, damit wir beim Neustart die Werte aufrufen können
+                const aktuellerStand = JSON.stringify(zaehlerStand)
+                fs.writeFile('AktuellerStand.json', aktuellerStand, (err) => {
+                    if (err) {
+                        console.log(`Schreiben des aktuellen Standes fehlgeschlagen: ${err}`)
+                    }
+                })
             })
         }
     }
@@ -94,13 +101,6 @@ class BesucherZaehler{
         if (!inDemoMode && this.socketIO) {
             this.socketIO.emit('BesucherZaehler', sensorStateMachine.aktuellerStand())
         }
-        // schreibe Aktuellen Stand in Datei, damit wir beim Neustart die Werte aufrufen können
-        const aktuellerStand = JSON.stringify(sensorStateMachine.aktuellerStand())
-        fs.writeFile('AktuellerStand.json', aktuellerStand, (err) => {
-            if (err) {
-                console.log(`Schreiben des aktuellen Standes fehlgeschlagen: ${err}`)
-            }
-        })
     }
 
     randomBesucher() {
