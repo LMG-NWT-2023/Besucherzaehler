@@ -1,5 +1,5 @@
 var Gpio = require('onoff').Gpio //include onoff to interact with the GPIO
-
+const fs = require('fs')
 const {States, SensorStateMachine} = require('./SensorStateMachine')
 const sensorStateMachine = new SensorStateMachine()
 
@@ -94,6 +94,13 @@ class BesucherZaehler{
         if (!inDemoMode && this.socketIO) {
             this.socketIO.emit('BesucherZaehler', sensorStateMachine.aktuellerStand())
         }
+        // schreibe Aktuellen Stand in Datei, damit wir beim Neustart die Werte aufrufen können
+        const aktuellerStand = JSON.stringify(sensorStateMachine.aktuellerStand())
+        fs.writeFile('AktuellerStand.json', aktuellerStand, (err) => {
+            if (err) {
+                console.log(`Schreiben des aktuellen Standes fehlgeschlagen: ${err}`)
+            }
+        })
     }
 
     randomBesucher() {

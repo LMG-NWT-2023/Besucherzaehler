@@ -19,6 +19,12 @@ class SensorStateMachine {
     ausgetreten = 0
     eingetreten = 0
     startDerMessung = 0
+    constructor(aktuellerStand){
+        if (aktuellerStand){
+            this.ausgetreten = aktuellerStand.ausgetreten
+            this.eingetreten = aktuellerStand.besucher
+        }
+    }
 
     aktuellerStand() {
         return {

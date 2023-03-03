@@ -76,6 +76,12 @@ describe('SendorStateMachine', function () {
     assert.equal(stateMachine.momentan(), 0)
     assert.equal(stateMachine.state, States.S0)
   })
+  it('soll mit einem Anfangswert beginnen', () => {
+    const stateMachine = new SensorStateMachine({momentan:4,besucher:6,ausgetreten:2})
+
+    assert.equal(stateMachine.momentan(), 4)
+    assert.equal(stateMachine.state, States.S0)
+  })
   describe('Änderungs-Event', () => {
     it('soll mich benachtichtigen wenn sich der Wert ändert', () => {
       var wurdeGerufen = false
