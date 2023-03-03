@@ -30,15 +30,15 @@ Bestell-Nr.: 1318255 - 62
 Belegung Sensorpaar 1: 
 Sensor links:
 Boardnummer:
-Vcc:    4 (Stromversorgung)
-GND:    9 (Ground)
-Vo:     11 (GPIO 17)
+Vcc:    4 (Stromversorgung) (rot)
+GND:    9 (Ground) (braun)
+Vo:     11 (GPIO 17) (orange)
 
 Sensor rechts
 Boardnummer:
-Vcc:    2 (Stromversorgung)
-GND:    20 (Ground)
-Vo:     22 (GPIO 25)
+Vcc:    2 (Stromversorgung) (rot)
+GND:    20 (Ground) (braun)
+Vo:     22 (GPIO 25) (orange)
 ```
 
 ```
