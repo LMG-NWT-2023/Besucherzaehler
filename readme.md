@@ -16,6 +16,8 @@ Damit wir beim Programmieren gleich auf Fehler in Javascript hingewiesen werden,
 Wenn man in VS Code die Probleme direkt sehen möchte braucht man die Extension ESLint.
 
 ## GPIO Belegung
+[gpio Belegung](https://de.pinout.xyz)
+
 Wir haben zwei Abstandssensoren vom Typ: 
 EAN: 4016138969504
 Bestell-Nr.: 1318255 - 62
