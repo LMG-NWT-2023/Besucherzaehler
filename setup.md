@@ -4,7 +4,7 @@
 
 Das ist die Anleitung, wie das Betriebssystem für den Raspberry Pi aufgesetzt wird, auf dem dann der Besucherzähler entwickelt werden kann. 
 
-Als Betriebssystem setzen wir auf die 32-bit Version von Raspberry Pi OS Lite. 
+Als Betriebssystem setzen wir auf die 32-bit Version von [Raspberry Pi OS Lite](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system). 
 
 Die Version "Lite" beinhaltet keine grafische Oberfläche. Diese wird auch nicht benötigt, weil die Entwicklung über das Netzwerk z.B. von Windows oder macOS aus erfolgt. Der Raspberry Pi wird als Server betrieben, an den die Sensoren angeschlossen sind und auf dem ein Webserver laufen wird, der die Besucherzahl zur Verfügung stellt. 
 
@@ -13,6 +13,8 @@ Der Quellcode wird auf GitHub abgelegt. Zusätzlich ist das Verzeichnis `~/devel
 Neben `git` wird auch das Command-Line-Interface von GitHub installiert, um eine einfache Authentifizierung über den Webbrowser zu ermöglichen. 
 
 Auf dem Raspberry Pi gibt es zunächst nur einen Benutzer `pi`, der von allen Schülern im Projektteam genutzt wird. Das Passwort ist allen bekannt. 
+
+Alternativ kann man seinen ssh public key auf dem Rapsberry pi in `authorized_keys` ablegen und die Anmeldung mit [Passwort deaktivieren](https://linuxhint.com/disable-password-login-linux/). 
 
 Für die Entwicklung nutzen wir Javascript. Um Javascript auf dem Server auszuführen brauchen wir [nodejs](https://nodejs.org). 
 
@@ -48,6 +50,7 @@ Hier folgende Funktionen konfigurieren:
 * Interface-Options - SSH - enable ssh
 * hostname: `raspibesucher`
 * enable WLAN wenn verfügbar
+* WLAN einrichten: System Options -> Wireless LAN
 
 ### Reboot
 
@@ -136,25 +139,6 @@ sudo service nmbd restart
 ```
 
 
-## GitHub-Login mit dem `gh`-CLI
-
-[Dokumentation zum CLI
-](https://cli.github.com/manual/)
-
-Login kann ganz einfach über der Command-Line-Interface (`CLI) von guten ausgeführt werden.
-
-Ich finde die Authentifizierung über den Browser ganz sinnvoll, weil ich so meine Github-Passwort nicht eingeben muss.
-
-
-```
-gh auth login
-```
-
-Am Ende kann man sich einfach abmelden: 
-
-```
-gh auth logout
-```
 
 
 ## Repository clonen
@@ -162,12 +146,5 @@ gh auth logout
 Jetzt kann einfach ein Repository von GitHub auf des Raspberry Pi geklont werden: 
 
 ```
-gh repo clone https://github.com/vincenttraxel/gpio-eins.git
-```
-
-
-Weil die Commits wahrscheinlich auf dem lokalen Desktop-Computer über die Dateifreigabe erstellt werden, kann man sich jetzt gerne wieder abmelden: 
-
-```
-gh auth logout
+git clone https://github.com/LMG-NWT-2023/Besucherzaehler.git
 ```
