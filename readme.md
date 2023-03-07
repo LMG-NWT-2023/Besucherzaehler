@@ -1,11 +1,26 @@
-# GPIO Eins Beispiel
+# Besucherzähler
+## Projekt
 
-Einfaches Beispiel, um mit node.js die GPIO-Pins auf dem Raspberry Pi zu programmieren. 
+Das Ziel des NWT-Projektes Besucherzähler ist es, der Bibliothekarin das manuelle Zählen  der Besucher zu vereinfachen. Dafür nutzen wir einen Raspberry Pi, an dem zwei Abstandssensoren angeschlossen sind. Mit den beinden Sensoren lässt sich bestimmen, ob ein Besucher ein- oder austritt. Über eine Website, die auf dem Raspberry Pi läuft, kann die Bibliothekarin auf die Daten zugreifen. Dafür müssen beide Computer jedoch im gleichen Netzwerk sein.
 
-Um alle node Module local zu installieren, führe folgenden Befehl aus:
+
+## Source Code
+
+Der komplette Source Code liegt in diesem Repository auf GitHub. Wir benutzen JavaScript auf [NodeJS](https://nodejs.org/).
+
+Wenn man die neuste Version von GitHub zieht, muss man folgenden Befehl ausführen, um alle node Module local zu installieren:
+
 
 ```
 npm install
+```
+
+Wenn man den Server auf einem Computer ohne GPIO-Anschlüsse laufen lässt, werden zufällige Werte angezeigt.
+
+Der Server wird gestartet mit:
+
+``` 
+npm start
 ```
 
 Die Anleitung, wie das Betriebssystem für den Raspberry Pi aufgesetzt findet sich in einer eigenen: [Anleitung](setup.md)
@@ -84,7 +99,7 @@ describe('SendorStateMachine', function () {
     })
   })
 }) 
-````
+``` 
 
 Jetzt können wir den Test im Terminal ausführen: 
 
@@ -93,6 +108,7 @@ npx mocha
 ```
  
 ## Git cheatsheet
+
 Wenn in einem localen Verzeichnis des Git Reposetories eine Datei verändert wurde, kann man kein `git pull` machen, da sonst die Änderung überschrieben werden würde. Es gibt drei Möglichkeiten:
 
 * die geänderte Datei in einen Commit packen
@@ -106,6 +122,7 @@ Danach eine neue Datei clonen:
 `git clone URL aus Github`
 
 ## html
+
 Hilfreiche Seiten:
 
 [selfhtml](https://wiki.selfhtml.org/wiki/SELFHTML)
