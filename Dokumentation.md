@@ -25,28 +25,3 @@ Um die Daten der Infrarotsensoren auszuwerten, haben wir eine State Machine gesc
 
 
 ## Ablauf:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Funktionsweise:
-![LMG Logo](relative/path/in/repository/to/public/images/lmg.png)
-
-
-
-## Ablauf:
