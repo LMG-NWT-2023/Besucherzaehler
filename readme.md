@@ -23,7 +23,18 @@ Der Server wird gestartet mit:
 npm start
 ```
 
-Die Anleitung, wie das Betriebssystem für den Raspberry Pi aufgesetzt findet sich in einer eigenen: [Anleitung](setup.md)
+Die Anleitung, wie das Betriebssystem für den Raspberry Pi aufgesetzt findet sich in einer 
+eigenen: [Anleitung](setup.md)
+
+## Remote Debugging
+Mit Remote Debugging ist es möglich das laufende Programm auf dem Raspberry Pi von einem anderen Computer aus zu debuggen.
+
+Dazu muss zunächst der Besucherzähler im Debug-Modus gestartet werden.
+
+``` 
+npm run debug
+```
+Danach kann man sich in Visual Studio Code mit dem Besucherzähler verbinden. In der Datai .vscode/launch.json gibt es eine Kofiguration "Attach to remote" in der man die IP-Adresse des Raspberry Pi und den Pfad konfigurieren muss. Wenn die Werte stimmen, kann man in der "Run and Debug" Ansicht die Konfiguration starten. Jetzt kann man Breakpoints setzten.
 
 ## Installation ESLint
 
