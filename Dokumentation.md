@@ -1,4 +1,6 @@
+![LMG Logo](./public/images/lmg.png)
 # Dokumentation
+
 Dieses Dokument beschreibt den Werdegang unseres Projektes: " Einen Besucherzähler bauen"
 ## Start- und Planungsphase:
 
@@ -6,16 +8,23 @@ Die erste Frage die wir uns stellten war, wie wir eintretende Personen erfassen 
 um anschließend final planen zu können unterhielten wir uns im Kick-off Gespräch mit Frau Erler. Hier hatten wir das Ziel die gleichen Vorstellungen wie Frau Erler vom Projekt zu bekommen um den Besucherzähler genau nach ihrem Wunsch zu kreiren. Daraufhin übergaben wir ihr unser Projektangebot, welches sie annahm und akzeptierte. Dieses Angebot unsererseits lässt sich in folgenden Muss-, Soll- und Kannzielen definieren.
 
 Mussziel:
--Einen Besucherzähler programmieren und in der Bücherei installieren. -Die von dem Besucherzähler erfassten Messdaten leicht abrufbar machen
+
+- Einen Besucherzähler programmieren und in der Bücherei installieren. -Die von dem Besucherzähler erfassten Messdaten leicht abrufbar machen
 
 Sollziel: 
--Eine freundliche Benutzeroberfläche zu designen und  -eine handliche und schöne Hardware zu entwerfen.
+
+- Eine freundliche Benutzeroberfläche zu designen und  - eine handliche und schöne Hardware zu entwerfen.
 
 Kannziel:
--Die Messwerte möglichst auf allen Geräten in der Bücherei abrufbar machen.  - ein automatisches Auswerten der Messwerte
+
+- Die Messwerte möglichst auf allen Geräten in der Bücherei abrufbar machen.  - ein automatisches Auswerten der Messwerte
+
+## Funktionsweise:
+### Sensordaten:
+Um die Daten der Infrarotsensoren auszuwerten, haben wir eine State Machine geschrieben. Diese besteht aus zwei Zweigen, die die Vorgänge Ein- und Austreten erkennen.
 
 
-
+## Ablauf:
 
 
 
