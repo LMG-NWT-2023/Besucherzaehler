@@ -34,6 +34,12 @@ class SensorStateMachine {
         }
     }
 
+    setzeAktuellenStand(neuerStand) {
+        this.state = States.S0
+        this.eingetreten = neuerStand.besucher
+        this.ausgetreten = neuerStand.ausgetreten
+    }
+
     momentan() {
         return this.eingetreten - this.ausgetreten
     }

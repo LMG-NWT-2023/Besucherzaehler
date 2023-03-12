@@ -1,6 +1,8 @@
 var Gpio = require('onoff').Gpio //include onoff to interact with the GPIO
 const fs = require('fs')
 const {States, SensorStateMachine} = require('./SensorStateMachine')
+
+const FileNameAktuellerStand = 'AktuellerStand.json'
 const sensorStateMachine = new SensorStateMachine()
 
 var prevValue1 = 0
@@ -72,7 +74,23 @@ try {
 
 class BesucherZaehler{
     socketIO = undefined
-
+    
+    constructor() {
+        fs.readFile(FileNameAktuellerStand, (err, data) => {
+            if (err) {
+                console.log(`Lesen des aktuellen Standes fehlgeschlagen: ${err}`)
+            } else {
+                try {
+                    const letzterAktuellerStand = JSON.parse(data)
+                    sensorStateMachine.setzeAktuellenStand(letzterAktuellerStand)
+                    console.log('Besucherzähler wurde mit dem letzten Stand gesartet:', sensorStateMachine.aktuellerStand() )
+                } catch (error) {
+                    console.log('FEHLER: Der letzte Zäherstand konnte nicht gelesen werden.')                    
+                }
+            }
+        })
+    }
+    
     setSocketIO(io) {
         this.socketIO = io
 
@@ -88,7 +106,7 @@ class BesucherZaehler{
                 this.socketIO.emit('BesucherZaehler', zaehlerStand)
                 // schreibe Aktuellen Stand in Datei, damit wir beim Neustart die Werte aufrufen können
                 const aktuellerStand = JSON.stringify(zaehlerStand)
-                fs.writeFile('AktuellerStand.json', aktuellerStand, (err) => {
+                fs.writeFile(FileNameAktuellerStand, aktuellerStand, (err) => {
                     if (err) {
                         console.log(`Schreiben des aktuellen Standes fehlgeschlagen: ${err}`)
                     }
