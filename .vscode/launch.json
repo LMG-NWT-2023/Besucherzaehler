@@ -24,6 +24,15 @@
             "env": {
                 // "LISTEN_ON_HOSTNAME": "0.0.0.0"
             }
-        }
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Attach to remote",
+            "address": "10.0.1.109", // <- IP_Adresse des Raspis
+            "port": 9229,
+            "localRoot": "${workspaceFolder}", 
+            "remoteRoot": "/home/pi/development/Besucherzaehler" // Pfad zum Besucherzähler
+          }
     ]
 }

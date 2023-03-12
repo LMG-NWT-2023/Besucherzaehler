@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "LISTEN_ON_HOSTNAME=0.0.0.0 node ./bin/www"
+    "start": "LISTEN_ON_HOSTNAME=0.0.0.0 node ./bin/www",
+    "debug": "LISTEN_ON_HOSTNAME=0.0.0.0 node --inspect=0.0.0.0:9229 ./bin/www"
   },
   "dependencies": {
     "onoff": "^6.0.3",
