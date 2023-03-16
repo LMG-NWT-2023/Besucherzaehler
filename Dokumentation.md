@@ -19,6 +19,8 @@ Kannziel:
 
 - Die Messwerte möglichst auf allen Geräten in der Bücherei abrufbar machen.  - ein automatisches Auswerten der Messwerte
 
+
+Desweiteren entwarfen wir ein Projektstrukturplan, in dem wir alle anstehenden Aufgaben zeitlich einteilten zum insgesamten Überblick unseres gesamten Projektes. Mit unserem von Frau Erler gestellten Budget von 250 Euro erstellten wir uns nun einen Kostenplan. Zunächst benötigten wir zwei Sensoren, einen Raspberrypi, der uns als Computer dienen soll und evtl. Strom- und Lankabel zur Installation in der Bücherei. Außerdem versuchten wir in einer Risikoanalyse zu veranschaulichen welche möglichen Risiken und Probleme während des Projektes uns zum Verhängnis werden könnten und welche Möglickeit wir haben diesen vorrausschauend aus dem Weg zu gehen. Dazu hatten wir noch die sinnvolle Idee Github zum gleichzeitigen Arbeiten, Austauschen von Daten und zur Projektübersicht zu nutzen.
 ## Funktionsweise:
 ### Sensordaten:
 Um die Daten der Infrarotsensoren auszuwerten, haben wir eine State Machine geschrieben. Diese besteht aus zwei Zweigen, die die Vorgänge Ein- und Austreten erkennen.
