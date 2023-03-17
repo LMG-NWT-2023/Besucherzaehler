@@ -5,7 +5,8 @@ var besucherZaehler = undefined
 var defaultModel = {
   besucher: 7,
   momentan: 4, 
-  ausgetreten: 3
+  ausgetreten: 3,
+  heute: "1.03.2023"
 }
 /* GET home page. */
 router.get('/', function(req, res, next) {

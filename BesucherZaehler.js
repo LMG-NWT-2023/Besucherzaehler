@@ -127,7 +127,8 @@ class BesucherZaehler{
         return {
             besucher: eingetreten,
             momentan: eingetreten - ausgetreten, 
-            ausgetreten: ausgetreten
+            ausgetreten: ausgetreten,
+            heute: "1.03.2023"
         }
     }
 

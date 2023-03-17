@@ -5,6 +5,7 @@ const ioStatus = document.getElementById("ioStatus");
 const elementBesucher = document.getElementById("besucher")
 const elementMomentan = document.getElementById("momentan")
 const elementAusgetreten = document.getElementById("ausgetreten")
+const elementHeute = document.getElementById("heute")
 
 socket.on('connect', () => {
     ioStatus.innerText = 'verbunden'
@@ -21,4 +22,5 @@ socket.on('BesucherZaehler', (zaehlerStand) => {
     elementBesucher.innerText = zaehlerStand.besucher
     elementMomentan.innerText = zaehlerStand.momentan
     elementAusgetreten.innerText = zaehlerStand.ausgetreten
+    elementHeute.innerText = zaehlerStand.heute
 })
