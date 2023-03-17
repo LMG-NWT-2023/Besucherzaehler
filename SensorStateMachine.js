@@ -1,6 +1,9 @@
+// Wir bauen uns einen DateFormatter um das aktuelle Datum in einen String zu schreiben
+const dateFormatter = new Intl.DateTimeFormat('de-de', {
+    dateStyle: "medium"
+  })
 
 // Die möglichen Zustände - damit wir beim Entwickeln eine ordenliche Code-Completion Unterstützung bekommen. 
-
 const States = {
     S0: "S0",
     E1: "E1",
@@ -14,8 +17,13 @@ const States = {
     ERROR: "ERROR",
 }
 exports.States = States
+
+function bestimmeHeute() {
+    return dateFormatter.format(Date.now())
+}
 class SensorStateMachine {
     state = States.S0
+    heute = bestimmeHeute()
     ausgetreten = 0
     eingetreten = 0
     startDerMessung = 0
@@ -30,7 +38,8 @@ class SensorStateMachine {
         return {
             momentan: this.eingetreten-this.ausgetreten,
             besucher: this.eingetreten, 
-            ausgetreten: this.ausgetreten
+            ausgetreten: this.ausgetreten,
+            heute: this.heute
         }
     }
 
@@ -38,6 +47,7 @@ class SensorStateMachine {
         this.state = States.S0
         this.eingetreten = neuerStand.besucher
         this.ausgetreten = neuerStand.ausgetreten
+        this.heute = neuerStand.heute
     }
 
     momentan() {
@@ -62,6 +72,11 @@ class SensorStateMachine {
     }
 
     incrEingetreten() {
+        if (this.heute !== bestimmeHeute()){
+            this.heute = bestimmeHeute()
+            this.ausgetreten = 0
+            this.eingetreten = 0
+        }
         this.eingetreten++
         if(this.onChangeCallback) {
             this.onChangeCallback(this.aktuellerStand())

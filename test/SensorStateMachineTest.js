@@ -106,7 +106,44 @@ describe('SendorStateMachine', function () {
       assert.ok(wurdeGerufen)
     })
   })
+  describe('Tageszähler', () => {
+    it('soll das aktuelle Datum im aktuellen Stand angeben', () => {
+      const stateMachine = new SensorStateMachine()
 
+      stateMachine.input({ Sensor1: 0, Sensor2: 1 })
+      stateMachine.input({ Sensor1: 1, Sensor2: 1 })
+      stateMachine.input({ Sensor1: 1, Sensor2: 0 })
+      stateMachine.input({ Sensor1: 0, Sensor2: 0 })
+
+      assert.equal(stateMachine.momentan(), 1)
+      const aktuellerStand = stateMachine.aktuellerStand()
+      assert.equal(aktuellerStand.heute.length, 10)
+    })
+    it('soll das aktuelle Datum im aktuellen Stand angeben', () => {
+      const stateMachine = new SensorStateMachine()
+      stateMachine.setzeAktuellenStand({momentan:4,besucher:6,ausgetreten:2, heute: "01.03.2023"})
+      const aktuellerStand = stateMachine.aktuellerStand()
+      assert.equal(aktuellerStand.heute, "01.03.2023")
+    })
+    it('soll den Zäher auf Null setzten, wenn der aktuelle Stand von einem Tag in der Vergangenheit ist', () => {
+      const stateMachine = new SensorStateMachine()
+      stateMachine.setzeAktuellenStand({momentan:4,besucher:6,ausgetreten:2, heute: "01.03.2023"})
+
+      const alterStand = stateMachine.aktuellerStand()
+      assert.equal(alterStand.heute, "01.03.2023")
+      assert.equal(alterStand.besucher, 6)
+      // Person betritt den Raum
+      stateMachine.input({ Sensor1: 0, Sensor2: 1 })
+      stateMachine.input({ Sensor1: 1, Sensor2: 1 })
+      stateMachine.input({ Sensor1: 1, Sensor2: 0 })
+      stateMachine.input({ Sensor1: 0, Sensor2: 0 })
+
+      const aktuellerStand = stateMachine.aktuellerStand()
+      assert.notEqual(aktuellerStand.heute, "01.03.2023")
+      assert.equal(aktuellerStand.besucher, 1)
+
+    })
+  })
 }) 
 
 
