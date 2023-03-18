@@ -46,30 +46,39 @@ Wir haben uns dazu entschieden in der Programmiersprache JavaScript zu schreiben
 Unser Prototyp-Skript funktionierte ziemlich gut für einen langsamen Ein- und Austritt, jedoch fielen uns langsam immer mehr und mehr Einzelfälle ein, mit denen unser Skript nicht klarkommen würde. Was passiert zum Beispiel, wenn eine Person den ersten Sensor aktiviert, dann aber umdreht und wieder zurückgeht? Oder was passiert, wenn aus irgendeinem Grund beide Sensoren gleichzeitig aktiviert werden?
 Nach einiger Recherche haben wir herausgefunden, dass es sinnvoll wäre eine Statemachine zu entwickeln.
 
+## Funktionsweise
 
+Auf dem Raspberry Pi läuft das Betriebssystem [Raspberry Pi OS Lite](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system), welches keine grafische Oberfläche beinhaltet. Diese wird auch nicht benötigt, weil die Entwicklung über das Netzwerk z.B. von Windows oder macOS aus erfolgt.
+
+Als Programmiersprache nutzen wir für den Besucherzähler JavaSkript und die Webseite HTML, CSS und JavaScript. Den gesamten Sorce Code inclusive Dokumentation haben wir auf Git Hub Abgelegt. Dadurch konnten wir einfach den neusten Stand untereinander austauschen.
+
+Anfangs schrieben wir ein sehr einfaches Programm, das die Sensordaten auswertete. Dieses funktionierte ziemlich gut für langsames ein- und austreten, jedoch fielen uns immer mehr Sonderfälle ein, mit denen unser Programm nicht umgehen konnte. Was passiert zum Beispiel, wenn eine Person den ersten Sensor aktiviert, dann aber umdreht und wieder zurückgeht? Oder was passiert, wenn aus irgendeinem Grund beide Sensoren gleichzeitig aktiviert werden?
+Nach einiger Recherche haben wir uns für eine Statemachine entschieden, um mit den Sensorzuständen besser umzugehen.
+
+In der Datei "SensorStateMachine.js" erkennt man gut die einzelnen Zustände. 
 ## Statemachine
 
-Eine Statemachine (Endlicher Automat) kann verschiedene Zustände haben. Manche Zustände können nur erreicht werden, wenn ein bestimmter Zustand herrscht und dazu eine Bedingung erfüllt wird.
+Eine Statemachine kann verschiedene Zustände haben. Manche Zustände können nur erreicht werden, wenn ein bestimmter Zustand herrscht und dazu eine Bedingung erfüllt wird.
 Als Beispiel haben wir eine Pflanze die den Zustand „Samen“ hat. Wenn nun die Bedingung „Regen“ erfüllt wird, wechselt die Pflanze in den Zustand „Sprosse“.
 Durch diese Zustände und Bedingungen können sich Pfade entwickeln.
 Bei unserem Besucherzähler haben wir die Pfade „Eintreten“ und „Austreten“.
 
-Als wir dieses ganze Konzept in die Praxis umgesetzt hatten, ließen wir einige Tests laufen, um sicher zu gehen, dass das Zählen der Besucher einwandfrei funktioniert. Diese Testdurchläufe liefen überraschend gut.
+Als wir dieses ganze Konzept in die Praxis umgesetzt hatten, ließen wir einige Tests laufen. Diese Testdurchläufe liefen überraschend gut.
 
 ## Webseite
 
-Nachdem wir eine gute Grundlage für das Zählen der Besucher hatten, fingen wir an uns Gedanken über die Webseite und das Netzwerk zu machen. Grundidee war es, den Raspberry Pi in ein Netzwerk zu kriegen, damit wir dann die Besucherzahlen auf eine Webseite laden können. Frau Ehrler könnte dann diese Webseite auf ihrem Computer aufrufen und gemütlich die ganzen Daten einsehen.
+Nachdem wir eine gute Grundlage für das Zählen der Besucher hatten, starteten wir mit der Webseite. Grundidee war es, dass der Raspberry Pi und der Computer bzw. das Tablet im gleichen Netzwerk sind. So kann man die Webseite, die auf dem Raspberry Pi läuft, von jedem Gerät im Netzwerk aus laden. Frau Ehrler kann diese Webseite auf ihrem Tablet aufrufen und die Besucherzahl sehen.
 Wir überlegten uns also was alles auf die Webseite muss. Schließlich haben wir die Webseite mit Besucherzahl, Leute die sich momentan in der Bibliothek befinden, Leute die die Bibliothek verlassen haben, Banner und Schullogo entworfen.
 
 Wir haben uns außerdem noch dazu entschieden, die Möglichkeit einzubauen, die Werte manuell zu korrigieren, für den Fall, dass der Besucherzähler einen Fehler gemacht hat.
 
-Da wir leider Probleme hatten, den Raspberry Pi ins Netzwerk der Schule beziehungsweise das Netzwerk der Gemeinde zu kriegen, entschlossen wir uns, den Besucherzähler in unserem eigenen Netzwerk zu lassen.
+Da es nicht möglich ist den Raspberry Pi nach unseren Vorstellungen ins Schul-Netzwerk einzubinden, entschlossen wir uns den Besucherzähler in einem eigenen Netzwerk zu betreiben. Dafür benutzen wir einen einfachen WLAN-Router.
 
 ## Installation
 
-Von Anfang an war klar, dass wir den Besucherzähler bzw. die zwei Sensoren am Türrahmen installieren wollten. Die wichtigste Frage, die wir uns dabei stellten war, in welcher Höhe wir sie anbringen sollen. Der Grund dafür waren die verschiedenen Personen die als Besucher erfasst werden sollen, z.B. kleine Kinder, große Männer, Eltern mit Kinderwägen, größere Personengruppen. Die Best mögliche Lösung erschien uns dafür ca. 40 cm über dem Boden.
+Von Anfang an war klar, dass wir den Besucherzähler bzw. die zwei Sensoren an oder neben dem Türrahmen installieren wollen. Die wichtigste Frage, die wir uns dabei stellten war, in welcher Höhe wir sie anbringen sollen. Der Grund dafür waren die verschiedenen Personen die als Besucher erfasst werden sollen, z.B. kleine Kinder, große Männer, Eltern mit Kinderwägen, größere Personengruppen. Die Best mögliche Lösung erschien uns dafür ca. 30 cm über dem Boden.
 
-Den an die Sensoren angeschlossenen Raspberry Pi wollten wir nun, zusammen mit dem Router auf den Boden neben der Tür in einer Holz Box legen. So erhofften wir uns am besten die Besucher erfassen zu können. Bei einem Installationsversuch, bei dem wir die Sensoren an der beschriebenen Stelle prüfungsweise anbrachten, zählte der Besucherzähler drei echte Besucher. Dies gab uns die Versicherung, die richtige Stelle gefunden zu haben
+Den an die Sensoren angeschlossenen Raspberry Pi wollten wir nun, zusammen mit dem Router auf den Boden neben der Tür in einer Holzbox legen. Somit ist alles kompakt und sicher angebracht. Bei einem Installationsversuch, bei dem wir die Sensoren an der beschriebenen Stelle prüfungsweise anbrachten, zählte der Besucherzähler drei echte Besucher. Dies gab uns die Versicherung, die richtige Stelle gefunden zu haben
 
 
 ## Schwierigkeiten/Risiken 
