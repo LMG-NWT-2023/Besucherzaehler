@@ -3,7 +3,7 @@
 
 ## Einleitung
 
-Dieses Dokumantation beschreibt den Werdegang unseres Projektes "Einen Besucherzähler bauen", welches wir im Zuge unseres NWT Unterrichts in der Schule und Zuhause vom 29.11.2022 bis am 22.3.2023 bearbeitet haben. Das Projekt wurde von der Bibliothekarin Frau Ehrler in Auftrag gegeben. Das Ziel war es einen Besucherzähler für die Bücherei zu bauen, der dort die Besucher zählen kann.
+Dieses Dokumentation beschreibt den Werdegang unseres Projektes "Einen Besucherzähler bauen", welches wir im Zuge unseres NWT Unterrichts in der Schule und Zuhause vom 29.11.2022 bis am 22.3.2023 bearbeitet haben. Das Projekt wurde von der Bibliothekarin Frau Ehrler in Auftrag gegeben. Das Ziel war es einen Besucherzähler für die Bücherei zu bauen, der dort die Besucher zählen kann.
 Es werden Erläuterungen zur Funktionsweise sowie Skizzen und Fotos von verschiedenen Bereichen der Arbeitsphase zur Veranschaulichung und Erklärung unseres Projektes dargestellt.
 Ziel dieser Dokumentation ist es, den allgemeinen Prozess des Projektes, von Start- und Planungsphase bis zu Installation und Fazit unseres Projektes aufzuzeigen und zu verdeutlichen
 
@@ -19,7 +19,7 @@ Ziel dieser Dokumentation ist es, den allgemeinen Prozess des Projektes, von Sta
 
 ## Start- und Planungsphase: 
 
-Um die Personen zu erfassen, welche die Bibliothek besuchen, entschieden wir uns für zwei Infrarotsensoren. Somit brauchen wir keinen Reflektor auf der anderen Seite. Zum Auslesen dieser Daten benutzen wir einen Raspberry Pi. Am Anfang wussten wir noch nicht, wie Frau Ehler die Daten bekommen und lesen soll. Unser Ziel war es jedoch die Daten des Besucherzählers auf einer Webseite darzustellen, damit die Besucherzahl über Computer, Handy oder Tablet erreichbar ist. Vorteilhaft an dieser Lösung ist, dass der Raspberry Pi keinen eigenen Display braucht.
+Um die Personen zu erfassen, welche die Bibliothek besuchen, entschieden wir uns für zwei Infrarotsensoren. Somit brauchen wir keinen Reflektor auf der anderen Seite. Zum Auslesen dieser Daten benutzen wir einen Raspberry Pi. Am Anfang wussten wir noch nicht, wie Frau Ehrler die Daten bekommen und lesen soll. Unser Ziel war es jedoch die Daten des Besucherzählers auf einer Webseite darzustellen, damit die Besucherzahl über Computer, Handy oder Tablet erreichbar ist. Vorteilhaft an dieser Lösung ist, dass der Raspberry Pi keinen eigenen Display braucht.
 Zu Beginn überlegten wir, ob wir einen schon fertigen Besucherzähler im Internet kaufen wollen und uns nur auf die Benutzeroberfläche konzentrieren, oder den Besucherzähler und die Website selber programmieren. Wir entschieden uns dafür, einen kompletten Besucherzähler zu bauen.
 Nach dem Kick-Off Gespräch am 7.12.2022 schickten wir Frau Ehrler unser Projektangebot, welchem sie zustimmte. Dieses Angebot lässt sich in folgenden Muss-, Soll- und Kann-Zielen definieren.
 
@@ -33,7 +33,7 @@ Kann-Ziel:
 * Die Messwerte möglichst auf allen Geräten in der Bücherei abrufbar machen.
 
 Ein automatisches Auswerten der Messwerte
-Des Weiteren entwarfen wir einen Projektstrukturplan, in dem wir alle anstehenden Aufgaben zeitlich einteilten zum allgemeinen Überblick unseres Projektes. Mit unserem von Frau Ehrler gestellten Budget von 250 Euro erstellten wir uns nun einen Kostenplan. Zunächst benötigten wir zwei Sensoren, einen Raspberry Pi, der uns als Computer dienen soll und evtl. Strom- und LAN-Kabel zur Installation in der Bücherei. Außerdem versuchten wir in einer Risikoanalyse zu veranschaulichen welche möglichen Risiken und Probleme während des Projektes uns zum Verhängnis werden könnten und welche Möglichkeit wir haben diesen vorrausschauend aus dem Weg zu gehen. Dazu hatten wir noch die sinnvolle Idee Github zum gleichzeitigen Arbeiten, Austauschen von Daten und zur Projektübersicht zu nutzen.
+Des Weiteren entwarfen wir einen Projektplan, in dem wir alle anstehenden Aufgaben zeitlich einteilten zum allgemeinen Überblick unseres Projektes. Mit unserem von Frau Ehrler gestellten Budget von 250 Euro erstellten wir uns nun einen Kostenplan. Zunächst benötigten wir zwei Sensoren, einen Raspberry Pi, der uns als Computer dienen soll und evtl. Strom- und LAN-Kabel zur Installation in der Bücherei. Außerdem versuchten wir in einer Risikoanalyse zu veranschaulichen welche möglichen Risiken und Probleme während des Projektes uns zum Verhängnis werden könnten und welche Möglichkeit wir haben diesen vorausschauend aus dem Weg zu gehen. Dazu hatten wir noch die sinnvolle Idee Github zum gleichzeitigen Arbeiten, Austauschen von Daten und zur Projektübersicht zu nutzen.
 
 ## Start der Entwicklung
 
@@ -50,7 +50,7 @@ Nach einiger Recherche haben wir herausgefunden, dass es sinnvoll wäre eine Sta
 
 Auf dem Raspberry Pi läuft das Betriebssystem [Raspberry Pi OS Lite](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system), welches keine grafische Oberfläche beinhaltet. Diese wird auch nicht benötigt, weil die Entwicklung über das Netzwerk z.B. von Windows oder macOS aus erfolgt.
 
-Als Programmiersprache nutzen wir für den Besucherzähler JavaSkript und die Webseite HTML, CSS und JavaScript. Den gesamten Sorce Code inclusive Dokumentation haben wir auf Git Hub Abgelegt. Dadurch konnten wir einfach den neusten Stand untereinander austauschen.
+Als Programmiersprache nutzen wir für den Besucherzähler JavaSkript und die Webseite HTML, CSS und JavaScript. Den gesamten Source Code inclusive Dokumentation haben wir auf Git Hub Abgelegt. Dadurch konnten wir einfach den neusten Stand untereinander austauschen.
 
 Anfangs schrieben wir ein sehr einfaches Programm, das die Sensordaten auswertete. Dieses funktionierte ziemlich gut für langsames ein- und austreten, jedoch fielen uns immer mehr Sonderfälle ein, mit denen unser Programm nicht umgehen konnte. Was passiert zum Beispiel, wenn eine Person den ersten Sensor aktiviert, dann aber umdreht und wieder zurückgeht? Oder was passiert, wenn aus irgendeinem Grund beide Sensoren gleichzeitig aktiviert werden?
 Nach einiger Recherche haben wir uns für eine Statemachine entschieden, um mit den Sensorzuständen besser umzugehen.
@@ -63,7 +63,7 @@ Als Beispiel haben wir eine Pflanze die den Zustand „Samen“ hat. Wenn nun di
 Durch diese Zustände und Bedingungen können sich Pfade entwickeln.
 Bei unserem Besucherzähler haben wir die Pfade „Eintreten“ und „Austreten“.
 
-Als wir dieses ganze Konzept in die Praxis umgesetzt hatten, ließen wir einige Tests laufen. Diese Testdurchläufe liefen überraschend gut.
+Als wir dieses ganze Konzept in die Praxis umgesetzt hatten, ließen wir einige Tests laufen. Diese Testläufe liefen überraschend gut.
 
 ## Webseite
 
@@ -83,7 +83,7 @@ Den an die Sensoren angeschlossenen Raspberry Pi wollten wir nun, zusammen mit d
 
 ## Schwierigkeiten/Risiken 
 
-Ein anfangs sehr großes Problem welches beim Programmieren der Sensoren auftrat war, dass die Anzeigewerte der Sensoren beim Durchlaufen einer Person enorm flackerten. Nach längerem Überlegen kam uns die Idee, eine 1-Sekunden Sperre einzubauen, nachdem eine Person durch die Sensoren läuft. So kam es nicht mehr zu dem Problem, dass der Besucherzähler pro Person mehrere 100 Male Werte anzeigte und außerdem verhinderte es, dass mehrere Personen gleichzeitig unübersichtlich aufgezeigt werden, sondern nur eine Person pro Sekunde durchlaufen kann.
+Ein anfangs sehr großes Problem welches beim Programmieren der Sensoren auftrat war, dass die Werte der Sensoren beim Durchlaufen einer Person enorm flackerten. Nach längerem Überlegen kam uns die Idee, eine 1-Sekunden Sperre einzubauen, nachdem eine Person durch die Sensoren läuft. So kam es nicht mehr zu dem Problem, dass der Besucherzähler pro Person mehrere 100 Male Werte anzeigte und außerdem verhinderte es, dass mehrere Personen gleichzeitig unübersichtlich aufgezeigt werden, sondern nur eine Person pro Sekunde durchlaufen kann.
 
 Ein weiteres Problem lag darin, dass wir für das Installieren des Besucherzählers in der Bibliothek eigentlich planten, mit einem LAN-Kabel oder mit WLAN ins gleiche Netzwerk wie Frau Ehrler mit ihrem Computer zu gehen. Dies hatte das Ziel, dass sie dadurch mit der Webseite des Besucherzählers die Messwerte aufrufen kann. Allerdings mussten wir für diesen Zugang erst an Erlaubnis gelangen, weswegen wir mit Herrn Baumhof korrespondierten. Leider erfuhren wir von ihm, dass es unter keinen Umständen möglich sein würde, in dasselbe Netzwerk wie Frau Ehrler mit ihrem Computer zu kommen.
 Letztendlich haben wir uns dazu entschlossen unseren Raspberry Pi in unserem eigenen Netzwerk zu lassen und dazu in der Bibliothek unseren eigenen Router mit anzubringen. Dadurch kann sich Frau Ehrler mit einem anderen Gerät in unser Netzwerk einloggen und bekommt dadurch Zugriff auf die Messdaten auf der Webseite.
@@ -93,7 +93,7 @@ Letztendlich haben wir uns dazu entschlossen unseren Raspberry Pi in unserem eig
 
 Abschließend und zusammenfassend können wir sagen, dass dieses Projekt sehr positiv für uns verlaufen ist. Wir haben gelernt unsere Ideen zu gliedern, umzusetzen und uns eine Lösung zu überlegen, wenn etwas nicht so klappte, wie wir es uns vorstellten.
 
-Außerdem haben wir Erfahrungen fürs Leben in den Bereichen Teamarbeit und gemeinsames Zeitmanagement gesammelt, da wir uns oft nach unserem Zeitprojektplan richten mussten und Zeitfristen setzen und einhalten mussten. Wenn also etwas nicht in der vorgesehenen Zeit funktionierte, mussten wir uns schnellst möglich Lösungen überlegen und Prioritäten setzten.
+Außerdem haben wir Erfahrungen fürs Leben in den Bereichen Teamarbeit und gemeinsames Zeitmanagement gesammelt, da wir uns oft nach unserem Projektplan richten mussten und Zeitfristen setzen und einhalten mussten. Wenn also etwas nicht in der vorgesehenen Zeit funktionierte, mussten wir uns schnellst möglich Lösungen überlegen und Prioritäten setzten.
 
 Trotzdem hatten wir generell das Problem, dass wir bei jeder Entscheidung an unserem Besucherzähler immer sehr lange überlegen mussten, da wir nie wussten welche Idee und Umsetzungsart für den Besucherzähler im Endeffekt die Beste ist.
 
