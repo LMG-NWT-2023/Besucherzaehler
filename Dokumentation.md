@@ -35,27 +35,26 @@ Kann-Ziel:
 Ein automatisches Auswerten der Messwerte
 Des Weiteren entwarfen wir einen Projektplan, in dem wir alle anstehenden Aufgaben zeitlich einteilten zum allgemeinen Überblick unseres Projektes. Mit unserem von Frau Ehrler gestellten Budget von 250 Euro erstellten wir uns nun einen Kostenplan. Zunächst benötigten wir zwei Sensoren, einen Raspberry Pi, der uns als Computer dienen soll und evtl. Strom- und LAN-Kabel zur Installation in der Bücherei. Außerdem versuchten wir in einer Risikoanalyse zu veranschaulichen welche möglichen Risiken und Probleme während des Projektes uns zum Verhängnis werden könnten und welche Möglichkeit wir haben diesen vorausschauend aus dem Weg zu gehen. Dazu hatten wir noch die sinnvolle Idee Github zum gleichzeitigen Arbeiten, Austauschen von Daten und zur Projektübersicht zu nutzen.
 
-## Start der Entwicklung
-
-Als wir uns zum ersten Mal trafen, um an dem Projekt zu arbeiten, hatten wir einen Raspberry Pi, zwei Infrarotsensoren und einige Kabel sowie Widerstände etc. zur Verfügung. Der aller erste Schritt war es, erstmal irgendwelche Daten aus den Sensoren ablesen zu können. Also folgten wir einer Anleitung im Internet und hatten nach ca. 30 Minuten die Sensoren an dem Raspberry Pi angeschlossen, welcher wiederum an einen Computer angeschlossen war. In JavaScript haben wir dann ein kleines Skript geschrieben, welches die elektrischen Signale der Sensoren in Nullen und Einsen umwandelt. Auf einer Konsole konnten wir dann sehen, ob die Sensoren etwas erfassen oder nicht.
-Damit wir wissen ob eine Person die Bücherei betritt oder verlässt, benutzen wir zwei Sensoren. Je nach dem welcher Sensor als erstes aktiviert wird, wissen wir ob eine Person ein- oder austretet.
-Noch am selben Tag hatten wir ein Prototyp-Skript geschrieben, welches bereits eintretende und austretende Besucher erkennen konnte und die Anzahl der Besucher erfassen konnte.
-
-Wir haben uns dazu entschieden in der Programmiersprache JavaScript zu schreiben, da wir später im Projekt die Besucherdaten auf eine Webseite hochladen wollen, damit Frau Ehrler einfach auf sie zugreifen kann. In der Webentwicklung arbeitet man üblich mit den Sprachen HTML, CSS und JavaScript zusammen.
-
-Unser Prototyp-Skript funktionierte ziemlich gut für einen langsamen Ein- und Austritt, jedoch fielen uns langsam immer mehr und mehr Einzelfälle ein, mit denen unser Skript nicht klarkommen würde. Was passiert zum Beispiel, wenn eine Person den ersten Sensor aktiviert, dann aber umdreht und wieder zurückgeht? Oder was passiert, wenn aus irgendeinem Grund beide Sensoren gleichzeitig aktiviert werden?
-Nach einiger Recherche haben wir herausgefunden, dass es sinnvoll wäre eine Statemachine zu entwickeln.
-
 ## Funktionsweise
 
 Auf dem Raspberry Pi läuft das Betriebssystem [Raspberry Pi OS Lite](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system), welches keine grafische Oberfläche beinhaltet. Diese wird auch nicht benötigt, weil die Entwicklung über das Netzwerk z.B. von Windows oder macOS aus erfolgt.
 
-Als Programmiersprache nutzen wir für den Besucherzähler JavaSkript und die Webseite HTML, CSS und JavaScript. Den gesamten Source Code inclusive Dokumentation haben wir auf Git Hub Abgelegt. Dadurch konnten wir einfach den neusten Stand untereinander austauschen.
+Als Programmiersprache nutzen wir für den Besucherzähler JavaSkript und die Webseite HTML, CSS und JavaScript. Den gesamten Source Code inclusive Dokumentation haben wir auf Git Hub abgelegt. Dadurch konnten wir einfach den neusten Stand untereinander austauschen.
 
-Anfangs schrieben wir ein sehr einfaches Programm, das die Sensordaten auswertete. Dieses funktionierte ziemlich gut für langsames ein- und austreten, jedoch fielen uns immer mehr Sonderfälle ein, mit denen unser Programm nicht umgehen konnte. Was passiert zum Beispiel, wenn eine Person den ersten Sensor aktiviert, dann aber umdreht und wieder zurückgeht? Oder was passiert, wenn aus irgendeinem Grund beide Sensoren gleichzeitig aktiviert werden?
+Anfangs schrieben wir ein sehr einfaches Programm, das die Sensordaten auswertete und in die Konsole schrieb. Damit wir wissen ob eine Person die Bücherei betritt oder verlässt, benutzen wir zwei Sensoren. Je nach dem welcher Sensor als erstes aktiviert wird, wissen wir ob eine Person ein- oder austritt. Dieses Program funktionierte ziemlich gut für langsames ein- und austreten, jedoch fielen uns immer mehr Sonderfälle ein, mit denen unser Programm nicht umgehen konnte. Was passiert zum Beispiel, wenn eine Person den ersten Sensor aktiviert, dann aber umdreht und wieder zurückgeht? Oder was passiert, wenn aus irgendeinem Grund beide Sensoren gleichzeitig aktiviert werden?
 Nach einiger Recherche haben wir uns für eine Statemachine entschieden, um mit den Sensorzuständen besser umzugehen.
 
-In der Datei "SensorStateMachine.js" erkennt man gut die einzelnen Zustände. 
+In der Datei "SensorStateMachine.js" erkennt man gut die einzelnen Zustände. Hier werden die Sensordaten ausgewertet und so die Besucher gezählt. Mit einem Test, der die verschiedenen Besuchereintritte simuliert, können wir bei Veränderungen einfach sehen, ob noch alles funktioniert.
+
+Jedes mal wenn sich die Besucherzahl ändert, wird der alte Wert in AktuellerStand.JSON überschrieben. Somit geht die Besucherzahl nicht verloren, wenn der Raspberry Pi mal ausgeht.
+Außerdem ist die Besucherzahl an das Datum gebunden und sobald ein neues Datum ist wird diese auf Null gesetzt.
+
+Der Raspberry Pi startet den Besucherzähler automatisch, sobald er hochgefahren ist.
+
+Die gemessene Besucherzahl wird auf einer Webseite angezeigt. Diese läuft auf dem Raspberry Pi. Über eine WEBSocket IO wird die Besucherzahl auf der Webseite verändert, ohne dass man neu laden muss.
+
+
+
 ## Statemachine
 
 Eine Statemachine kann verschiedene Zustände haben. Manche Zustände können nur erreicht werden, wenn ein bestimmter Zustand herrscht und dazu eine Bedingung erfüllt wird.
@@ -68,7 +67,7 @@ Als wir dieses ganze Konzept in die Praxis umgesetzt hatten, ließen wir einige 
 ## Webseite
 
 Nachdem wir eine gute Grundlage für das Zählen der Besucher hatten, starteten wir mit der Webseite. Grundidee war es, dass der Raspberry Pi und der Computer bzw. das Tablet im gleichen Netzwerk sind. So kann man die Webseite, die auf dem Raspberry Pi läuft, von jedem Gerät im Netzwerk aus laden. Frau Ehrler kann diese Webseite auf ihrem Tablet aufrufen und die Besucherzahl sehen.
-Wir überlegten uns also was alles auf die Webseite muss. Schließlich haben wir die Webseite mit Besucherzahl, Leute die sich momentan in der Bibliothek befinden, Leute die die Bibliothek verlassen haben, Banner und Schullogo entworfen.
+Wir überlegten uns also was alles auf die Webseite muss. Schließlich haben wir die Webseite mit Besucherzahl, Leute die sich momentan in der Bibliothek befinden, Leute die die Bibliothek verlassen haben und Banner und Schullogo entworfen.
 
 Wir haben uns außerdem noch dazu entschieden, die Möglichkeit einzubauen, die Werte manuell zu korrigieren, für den Fall, dass der Besucherzähler einen Fehler gemacht hat.
 
