@@ -7,16 +7,6 @@ Dieses Dokumentation beschreibt den Werdegang unseres Projektes "Einen Besucherz
 Es werden Erläuterungen zur Funktionsweise sowie Skizzen und Fotos von verschiedenen Bereichen der Arbeitsphase zur Veranschaulichung und Erklärung unseres Projektes dargestellt.
 Ziel dieser Dokumentation ist es, den allgemeinen Prozess des Projektes, von Start- und Planungsphase bis zu Installation und Fazit unseres Projektes aufzuzeigen und zu verdeutlichen
 
-
-
-
-
-
-
-
-
-
-
 ## Start- und Planungsphase: 
 
 Um die Personen zu erfassen, welche die Bibliothek besuchen, entschieden wir uns für zwei Infrarotsensoren. Somit brauchen wir keinen Reflektor auf der anderen Seite. Zum Auslesen dieser Daten benutzen wir einen Raspberry Pi. Am Anfang wussten wir noch nicht, wie Frau Ehrler die Daten bekommen und lesen soll. Unser Ziel war es jedoch die Daten des Besucherzählers auf einer Webseite darzustellen, damit die Besucherzahl über Computer, Handy oder Tablet erreichbar ist. Vorteilhaft an dieser Lösung ist, dass der Raspberry Pi keinen eigenen Display braucht.
@@ -39,9 +29,10 @@ Des Weiteren entwarfen wir einen Projektplan, in dem wir alle anstehenden Aufgab
 
 Auf dem Raspberry Pi läuft das Betriebssystem [Raspberry Pi OS Lite](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system), welches keine grafische Oberfläche beinhaltet. Diese wird auch nicht benötigt, weil die Entwicklung über das Netzwerk z.B. von Windows oder macOS aus erfolgt.
 
-Als Programmiersprache nutzen wir für den Besucherzähler JavaSkript und die Webseite HTML, CSS und JavaScript. Den gesamten Source Code inclusive Dokumentation haben wir auf Git Hub abgelegt. Dadurch konnten wir einfach den neusten Stand untereinander austauschen.
+Als Programmiersprache nutzen wir für den Besucherzähler JavaSkript und die Webseite HTML, CSS und JavaScript. Den gesamten Source Code inclusive Dokumentation haben wir auf Git Hub abgelegt. Dadurch können wir einfach den neusten Stand untereinander austauschen.
 
-Anfangs schrieben wir ein sehr einfaches Programm, das die Sensordaten auswertete und in die Konsole schrieb. Damit wir wissen ob eine Person die Bücherei betritt oder verlässt, benutzen wir zwei Sensoren. Je nach dem welcher Sensor als erstes aktiviert wird, wissen wir ob eine Person ein- oder austritt. Dieses Program funktionierte ziemlich gut für langsames ein- und austreten, jedoch fielen uns immer mehr Sonderfälle ein, mit denen unser Programm nicht umgehen konnte. Was passiert zum Beispiel, wenn eine Person den ersten Sensor aktiviert, dann aber umdreht und wieder zurückgeht? Oder was passiert, wenn aus irgendeinem Grund beide Sensoren gleichzeitig aktiviert werden?
+Anfangs schrieben wir ein sehr einfaches Programm, das die Sensordaten auswertete und in die Konsole schrieb. Damit wir wissen ob eine Person die Bücherei betritt oder verlässt, benutzen wir zwei Sensoren. Je nach dem welcher Sensor als erstes aktiviert wird, wissen wir ob eine Person ein- oder austritt.
+Dieses Program funktionierte ziemlich gut für langsames ein- und austreten, jedoch fielen uns immer mehr Sonderfälle ein, mit denen unser Programm nicht umgehen konnte. Was passiert zum Beispiel, wenn eine Person den ersten Sensor aktiviert, dann aber umdreht und wieder zurückgeht? Oder was passiert, wenn aus irgendeinem Grund beide Sensoren gleichzeitig aktiviert werden?
 Nach einiger Recherche haben wir uns für eine Statemachine entschieden, um mit den Sensorzuständen besser umzugehen.
 
 In der Datei "SensorStateMachine.js" erkennt man gut die einzelnen Zustände. Hier werden die Sensordaten ausgewertet und so die Besucher gezählt. Mit einem Test, der die verschiedenen Besuchereintritte simuliert, können wir bei Veränderungen einfach sehen, ob noch alles funktioniert.
@@ -52,6 +43,24 @@ Außerdem ist die Besucherzahl an das Datum gebunden und sobald ein neues Datum 
 Der Raspberry Pi startet den Besucherzähler automatisch, sobald er hochgefahren ist.
 
 Die gemessene Besucherzahl wird auf einer Webseite angezeigt. Diese läuft auf dem Raspberry Pi. Über eine WEBSocket IO wird die Besucherzahl auf der Webseite verändert, ohne dass man neu laden muss.
+
+Sensoren und Raspberry Pi haben wir über Jumperkabel nach folgendem Steckplan verbunden:
+
+```
+Belegung Sensorpaar 
+Sensor links:
+Boardnummer:
+Vcc:    4 (Stromversorgung) (rot)
+GND:    9 (Ground)(schwarz)
+Vo:     11 (GPIO 17)(gelb)
+
+Sensor rechts
+Boardnummer:
+Vcc:    2 (Stromversorgung)(rot)
+GND:    20 (Ground)(baun)
+Vo:     22 (GPIO 25)(orange)
+```
+
 
 
 
@@ -66,8 +75,10 @@ Als wir dieses ganze Konzept in die Praxis umgesetzt hatten, ließen wir einige 
 
 ## Webseite
 
-Nachdem wir eine gute Grundlage für das Zählen der Besucher hatten, starteten wir mit der Webseite. Grundidee war es, dass der Raspberry Pi und der Computer bzw. das Tablet im gleichen Netzwerk sind. So kann man die Webseite, die auf dem Raspberry Pi läuft, von jedem Gerät im Netzwerk aus laden. Frau Ehrler kann diese Webseite auf ihrem Tablet aufrufen und die Besucherzahl sehen.
+Nachdem wir eine gute Grundlage für das Zählen der Besucher hatten, starteten wir mit der Webseite. Grundidee war es, dass der Raspberry Pi und der Computer bzw. das Tablet im gleichen Netzwerk sind. Dafür haben wir einen eigenen Router, da wir das Schul-Netzwerk nicht wie geplant nutzen konnten. So kann man die Webseite, die auf dem Raspberry Pi läuft, von jedem Gerät im Netzwerk aus laden. Frau Ehrler kann diese Webseite auf ihrem Tablet aufrufen und die Besucherzahl sehen.
+
 Wir überlegten uns also was alles auf die Webseite muss. Schließlich haben wir die Webseite mit Besucherzahl, Leute die sich momentan in der Bibliothek befinden, Leute die die Bibliothek verlassen haben und Banner und Schullogo entworfen.
+
 
 Wir haben uns außerdem noch dazu entschieden, die Möglichkeit einzubauen, die Werte manuell zu korrigieren, für den Fall, dass der Besucherzähler einen Fehler gemacht hat.
 
@@ -80,12 +91,11 @@ Von Anfang an war klar, dass wir den Besucherzähler bzw. die zwei Sensoren an o
 Den an die Sensoren angeschlossenen Raspberry Pi wollten wir nun, zusammen mit dem Router auf den Boden neben der Tür in einer Holzbox legen. Somit ist alles kompakt und sicher angebracht. Bei einem Installationsversuch, bei dem wir die Sensoren an der beschriebenen Stelle prüfungsweise anbrachten, zählte der Besucherzähler drei echte Besucher. Dies gab uns die Versicherung, die richtige Stelle gefunden zu haben
 
 
-## Schwierigkeiten/Risiken 
+## Schwierigkeiten
 
-Ein anfangs sehr großes Problem welches beim Programmieren der Sensoren auftrat war, dass die Werte der Sensoren beim Durchlaufen einer Person enorm flackerten. Nach längerem Überlegen kam uns die Idee, eine 1-Sekunden Sperre einzubauen, nachdem eine Person durch die Sensoren läuft. So kam es nicht mehr zu dem Problem, dass der Besucherzähler pro Person mehrere 100 Male Werte anzeigte und außerdem verhinderte es, dass mehrere Personen gleichzeitig unübersichtlich aufgezeigt werden, sondern nur eine Person pro Sekunde durchlaufen kann.
+Ein anfangs großes Problem, welches beim Auslesen der Sensordaten auftrat war, dass die Werte der Sensoren beim Durchlaufen einer Person stark flackerten. Als Lösung bauten wir eine 1-Sekunden Sperre ein, die nach einem Ein- oder Austritt einsetzt. So kommt es nicht mehr zu dem Problem, dass der Besucherzähler pro Durchlauf mehr als eine Person zählt.
 
-Ein weiteres Problem lag darin, dass wir für das Installieren des Besucherzählers in der Bibliothek eigentlich planten, mit einem LAN-Kabel oder mit WLAN ins gleiche Netzwerk wie Frau Ehrler mit ihrem Computer zu gehen. Dies hatte das Ziel, dass sie dadurch mit der Webseite des Besucherzählers die Messwerte aufrufen kann. Allerdings mussten wir für diesen Zugang erst an Erlaubnis gelangen, weswegen wir mit Herrn Baumhof korrespondierten. Leider erfuhren wir von ihm, dass es unter keinen Umständen möglich sein würde, in dasselbe Netzwerk wie Frau Ehrler mit ihrem Computer zu kommen.
-Letztendlich haben wir uns dazu entschlossen unseren Raspberry Pi in unserem eigenen Netzwerk zu lassen und dazu in der Bibliothek unseren eigenen Router mit anzubringen. Dadurch kann sich Frau Ehrler mit einem anderen Gerät in unser Netzwerk einloggen und bekommt dadurch Zugriff auf die Messdaten auf der Webseite.
+Ein weiteres Problem ist bei der Netzwerk für die Webseite aufgekommen. Unser Ziel war es das Schul-Netzwerk dafür zu nutzen, doch das ist leider nicht möglich, da das Schul-Netzwerk segmentiert ist. Deshalb haben wir einen eigenen Router gekauft, der das Netzwerk aufbaut. In diesem sind der Raspberry Pi und Frau Ehrlers Tablet. Der Nachteil ist, dass sie mit dem Tablet keinen Internet Zugriff mehr hat, weshalb sie nicht den Computer zum Anzeigen nutzt.
 
 
 ## Fazit und Reflexion:
