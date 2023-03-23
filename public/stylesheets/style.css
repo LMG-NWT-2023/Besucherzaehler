@@ -52,6 +52,24 @@ a {
     color: #7c7c7c;
 }
 
+.button {
+    background-color: rgb(255, 81, 0);
+    border: none;
+    color: white;
+    height: 55px;
+    width: 15%;
+    font-size: 18px;
+    margin: 4px 2px;
+    border-radius: 12px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+}
+
+.button1:hover {
+    box-shadow: 0 12px 12px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
 #object1 {
     position: fixed;
 
