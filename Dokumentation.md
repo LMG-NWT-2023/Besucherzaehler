@@ -29,11 +29,11 @@ Auf dem Raspberry Pi läuft das Betriebssystem [Raspberry Pi OS Lite](https://ww
 
 Als Programmiersprache nutzen wir für den Besucherzähler JavaSkript und die Webseite HTML, CSS und JavaScript. Den gesamten Source Code inclusive Dokumentation haben wir auf Git Hub abgelegt. Dadurch können wir einfach den neusten Stand untereinander austauschen.
 
-Anfangs schrieben wir ein sehr einfaches Programm, das die Sensordaten auswertete und in die Konsole schrieb. Damit wir wissen ob eine Person die Bücherei betritt oder verlässt, benutzen wir zwei Sensoren. Je nach dem welcher Sensor als erstes aktiviert wird, wissen wir ob eine Person ein- oder austritt.
+Wir erstellten ein sehr einfaches Programm, welches die Sensordaten auswertete und in die Konsole schrieb. Damit wir wissen ob eine Person die Bücherei betritt oder verlässt, benutzen wir zwei Sensoren. Je nach dem welcher Sensor als erstes aktiviert wird, wissen wir ob eine Person ein- oder austritt.
 Dieses Program funktionierte ziemlich gut für langsames Ein- und Austreten, jedoch fielen uns immer mehr Sonderfälle ein, mit denen unser Programm nicht umgehen konnte. Was passiert zum Beispiel, wenn eine Person den ersten Sensor aktiviert, dann aber umdreht und wieder zurückgeht? Oder was passiert, wenn aus irgendeinem Grund beide Sensoren gleichzeitig aktiviert werden?
 Nach einiger Recherche haben wir uns für eine Statemachine entschieden, um mit den Sensorzuständen besser umzugehen.
 
-In der Datei "SensorStateMachine.js" erkennt man gut die einzelnen Zustände. Hier werden die Sensordaten ausgewertet und so die Besucher gezählt. Mit einem Test, der die verschiedenen Besuchereintritte simuliert, können wir bei Veränderungen einfach sehen, ob noch alles funktioniert.
+In der Datei ["SensorStateMachine.js"](https://github.com/LMG-NWT-2023/Besucherzaehler/blob/main/SensorStateMachine.js) erkennt man gut die einzelnen Zustände. Hier werden die Sensordaten ausgewertet und so die Besucher gezählt. Mit einem Test, der die verschiedenen Besuchereintritte simuliert, können wir bei Veränderungen einfach sehen, ob noch alles funktioniert.
 
 Jedes mal wenn sich die Besucherzahl ändert, wird der alte Wert in AktuellerStand.JSON überschrieben. Somit geht die Besucherzahl nicht verloren, wenn der Raspberry Pi mal ausgeht.
 Außerdem ist die Besucherzahl an das Datum gebunden und sobald ein neues Datum ist, wird diese auf Null gesetzt.
