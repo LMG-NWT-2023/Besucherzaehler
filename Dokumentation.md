@@ -99,7 +99,6 @@ Insgesamt sind wir dennoch sehr zufrieden mit unseren verbauten Komponenten, da 
 
 Die Installation ist uns ebenfalls gut gelungen, weil der Besucherzähler aus dieser Position fehlerfrei zählt.
 
-Würde man von diesem Punkt aus an dem Besucherzähler weiter arbeiten können, wäre es sinnvoll die analogen Werte weiter zu bearbeiten, da es hier noch Probleme gibt. Wenn man hier erreichen würde, das die Sensoren von einem viel weiteren Abstand messen, wie sie es jetzt schon tun, könnte man den Besucherzähler für größere Projekte erweitern
+Würde man von diesem Punkt aus an dem Besucherzähler weiter arbeiten können, wäre es sinnvoll die analogen Werte weiter zu bearbeiten, da es hier noch Probleme gibt. Wenn man hier erreichen würde, dass die Sensoren von einem viel weiteren Abstand messen, wie sie es jetzt schon tun, könnte man den Besucherzähler für größere Projekte erweitern
 
-Trotzdem war unser Projekt „Besucherzähler“sehr gut, da wir uns im Programmieren deutlich weiterentwickeln konnten und wir Programmieren und in Programmiersprachen wie JavaSkript lernen konnten. Die Aufgabenstellung war außerdem sehr passend für unsere Gruppe, aus dem Grund, dass wir uns alle für das Programmieren interessierten. Das Projekt stellte für uns alle eine Herausforderung und ein tolles Projekt dar.
-
+Trotzdem war unser Projekt „Besucherzähler“ sehr gut, da wir uns im Programmieren deutlich weiterentwickeln konnten. Die Aufgabenstellung war außerdem sehr passend für unsere Gruppe, aus dem Grund, dass wir uns alle für das Programmieren interessierten. Das Projekt stellte für uns alle eine Herausforderung und ein tolles Projekt dar.
