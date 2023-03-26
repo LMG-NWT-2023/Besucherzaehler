@@ -190,7 +190,7 @@ class SensorStateMachine {
                 this.state = States.ERROR
                 break
         }
-        this.log()
+        // this.log()
     }
 }
 exports.SensorStateMachine = SensorStateMachine

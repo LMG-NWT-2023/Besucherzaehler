@@ -1,18 +1,41 @@
-var Gpio = require('onoff').Gpio //include onoff to interact with the GPIO
 const fs = require('fs')
+const ADS1115 = require('ads1115')
+const i2c = require('i2c-bus')
+
+const schwelleADWandler = 2000
+const intervallADWandler = 100  // Millisekunden
+
 const {States, SensorStateMachine} = require('./SensorStateMachine')
 
 const FileNameAktuellerStand = 'AktuellerStand.json'
 const sensorStateMachine = new SensorStateMachine()
 
-var prevValue1 = 0
-var prevValue2 = 0
+// Auslesen der Abstände über den Analog-Digital-Wandler ADS1115
 
-var sensor1
-var sensor2
+i2c.openPromisified(1).then(async (bus) => {
+
+    const ads1115 = await ADS1115(bus)
+    // ads1115.gain = 1
+  
+    // Endlosschleife - die immer nach Millisekunden in intervallADWandler durchlaufen wird
+    setInterval(async ()=> {
+        let sensor1Value = await ads1115.measure('0+GND')
+        let sensor2Value = await ads1115.measure('1+GND')
+        const sensor1 = sensor1Value > schwelleADWandler ? 1 : 0
+        const sensor2 = sensor2Value > schwelleADWandler ? 1 : 0
+        // console.log(`${sensor1Value} ${sensor1} - ${sensor2Value} ${sensor2}`)
+
+        sensorStateMachine.input( {
+            Sensor1: sensor1, 
+            Sensor2: sensor2
+        } )
+        // sensorStateMachine.log()
+    }, intervallADWandler)
+  
+  })
 
 var inDemoMode = false
-
+/*
 // wenn wir nich auf dem Raspberry Pi laufen, nehmen wir einfach zufällige Werte
 
 try {
@@ -71,7 +94,7 @@ try {
     console.log('hier gibt es keine Sensoren. Die Besucherzahlen werden gewürfelt')
     inDemoMode = true
 }
-
+*/
 class BesucherZaehler{
     socketIO = undefined
     
