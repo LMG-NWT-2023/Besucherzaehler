@@ -33,14 +33,14 @@ Wir erstellten ein sehr einfaches Programm, welches die Sensordaten auswertete u
 Dieses Program funktionierte ziemlich gut für langsames Ein- und Austreten, jedoch fielen uns immer mehr Sonderfälle ein, mit denen unser Programm nicht umgehen konnte. Was passiert zum Beispiel, wenn eine Person den ersten Sensor aktiviert, dann aber umdreht und wieder zurückgeht? Oder was passiert, wenn aus irgendeinem Grund beide Sensoren gleichzeitig aktiviert werden?
 Nach einiger Recherche haben wir uns für eine Statemachine entschieden, um mit den Sensorzuständen besser umzugehen.
 
-In der Datei ["SensorStateMachine.js"](https://github.com/LMG-NWT-2023/Besucherzaehler/blob/main/SensorStateMachine.js) erkennt man gut die einzelnen Zustände. Hier werden die Sensordaten ausgewertet und so die Besucher gezählt. Mit einem Test, der die verschiedenen Besuchereintritte simuliert, können wir bei Veränderungen einfach sehen, ob noch alles funktioniert.
+In der Datei ["SensorStateMachine.js"](https://github.com/LMG-NWT-2023/Besucherzaehler/blob/main/SensorStateMachine.js) erkennt man gut die einzelnen Zustände. Hier werden die Sensordaten ausgewertet und so die Besucher gezählt. Mit einem [Test](https://github.com/LMG-NWT-2023/Besucherzaehler/blob/main/test/SensorStateMachineTest.js) , der die verschiedenen Besuchereintritte simuliert, können wir bei Veränderungen einfach sehen, ob noch alles funktioniert.
 
 Jedes mal wenn sich die Besucherzahl ändert, wird der alte Wert in AktuellerStand.JSON überschrieben. Somit geht die Besucherzahl nicht verloren, wenn der Raspberry Pi mal ausgeht.
 Außerdem ist die Besucherzahl an das Datum gebunden und sobald ein neues Datum ist, wird diese auf Null gesetzt.
 
 Der Raspberry Pi startet den Besucherzähler automatisch, sobald er hochgefahren ist.
 
-Die gemessene Besucherzahl wird auf einer Webseite angezeigt. Diese läuft auf dem Raspberry Pi. Über eine WEBSocket IO wird die Besucherzahl auf der Webseite verändert, ohne dass man neu laden muss.
+Die gemessene Besucherzahl wird auf einer Webseite angezeigt. Diese läuft auf dem Raspberry Pi. Über eine Web-Socket Verbindung wird die Besucherzahl auf der Webseite direkt verändert, ohne dass man die Webseite neu laden muss.
 
 Sensoren und Raspberry Pi haben wir über Jumperkabel nach folgendem Steckplan verbunden:
 
@@ -85,9 +85,9 @@ Den an die Sensoren angeschlossenen Raspberry Pi wollten wir zusammen mit dem Ro
 
 ## Schwierigkeiten
 
-Ein anfangs großes Problem, welches beim Auslesen der Sensordaten auftrat war, dass die Werte der Sensoren beim Durchlaufen einer Person stark flackerten. Als Lösung bauten wir eine [1-Sekunden Sperre](https://github.com/LMG-NWT-2023/Besucherzaehler/blob/8ca4bfdfd58c6d24f514d48bd6c5c3b30fde6301/SensorStateMachine.js#L62) ein, die nach einem Ein- oder Austritt einsetzt. So kommt es nicht mehr zu dem Problem, dass der Besucherzähler pro Durchlauf mehr als eine Person zählt.
+Ein anfangs großes Problem, welches beim Auslesen der Sensordaten auftrat war, dass die Werte der Sensoren beim Durchlaufen einer Person stark flackerten. Als Lösung bauten wir eine [1-Sekunden Sperre](https://github.com/LMG-NWT-2023/Besucherzaehler/blob/8ca4bfdfd58c6d24f514d48bd6c5c3b30fde6301/SensorStateMachine.js#L96) ein, die nach einem Ein- oder Austritt einsetzt. So kommt es nicht mehr zu dem Problem, dass der Besucherzähler pro Durchlauf mehr als eine Person zählt.
 
-Zudem hatten wir noch ein Problem den Raspberry Pi in ein Netwerk zu verbinden. Unser Ziel war es das Schul-Netzwerk dafür zu nutzen, doch das ist nicht möglich, da das Schul-Netzwerk segmentiert ist. Deshalb haben wir einen eigenen Router gekauft, welcher das Netzwerk aufbaut. In diesem sind der Raspberry Pi und ein Tablet in aus der Bücherei verbunden. Der Nachteil ist, dass Frau Ehrler mit dem Tablet keinen Internet Zugriff hat, weshalb sie nicht den Computer zum Anzeigen nutzten kann.
+Zudem hatten wir noch ein Problem den Raspberry Pi in ein Netzwerk zu verbinden. Unser Ziel war es das Schul-Netzwerk dafür zu nutzen, doch das ist nicht möglich, da das Schul-Netzwerk segmentiert ist. Deshalb haben wir einen eigenen Router gekauft, welcher das Netzwerk aufbaut. In diesem sind der Raspberry Pi und ein Tablet aus der Bücherei mit verbunden. Der Nachteil ist, dass Frau Ehrler mit dem Tablet keinen Internet Zugriff hat, weshalb sie nicht den Computer zum Anzeigen nutzten kann.
 
 
 ## Fazit und Reflexion:
