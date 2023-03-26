@@ -7,23 +7,26 @@
   <body>
     <h1 class="banner">NWT Besucherzähler</h1>
 
-    <p class="besucherZahl">Besucher: <span id="besucher"><%= besucher%></span></p>
-    <p class="subText">momentan in der Bibliothek: <strong id="momentan"><%= momentan%></strong>   ausgetreten: <strong id="ausgetreten"><%= ausgetreten%></strong></p>
-     <!--
+    <p class="besucherAktuell">Besucher aktuell 
+      <span id="momentan" class="besucherWert"><%= momentan%></span></p>
+    <p class="besucherInsgesamt">Besucher heute 
+       <span id="heute" class="heute">(<%= heute%>)</span>
+       <span id="besucher" class="besucherWert"><%= besucher%></span></p>
+     
     <p><span id="ioStatus" class="disconnected">initialisiere ...</span></p>
-     -->
+    
 
-    <p><strong id="heute"><%= heute%></strong></p>
+    <p class="heute"> </p>
     <p class="watermark">DaVaVi&#169; - 2023</p>
 
-    <button id="my-button" class="button button1">+ Besucher</button>
-    <button class="button button1">+ Ausgetreten</button>
+    <!-- <button id="my-button" class="button button1">+ Besucher</button>
+    <button class="button button1">+ Ausgetreten</button> -->
 
     <img id="object1" src="/images/lmg.png" alt="LMG Logo">
-    <!--
+    
     <script src="/socket.io/socket.io.js"></script>
     <script src="/javascripts/main.js"></script>
 
-    -->
+  
   </body>
 </html>

@@ -8,12 +8,12 @@ const elementAusgetreten = document.getElementById("ausgetreten")
 const elementHeute = document.getElementById("heute")
 
 socket.on('connect', () => {
-    ioStatus.innerText = 'verbunden'
+    ioStatus.innerText = 'Verbindungsstatus: verbunden'
     ioStatus.classList.replace('disconnected', 'connected')
 })
 
 socket.on('disconnect', () => {
-    ioStatus.innerText = 'getrennt'
+    ioStatus.innerText = 'Verbindungsstatus: getrennt'
     ioStatus.classList.replace('connected', 'disconnected')
 })
 

@@ -24,19 +24,27 @@ a {
     top: 0;
 }
 
-.besucherZahl {
-    padding: 160px 0 0;
+.besucherAktuell {
+    padding: 200px 0 0;
     font-weight: 600;
-    font-size: 70px;
+    font-size: 30px;
 }
 
-.subText {
-    word-spacing: 7px;
-    font-family: "Calibri Light", "Courier New", monospace;
+.besucherWert {
+    padding-left: 20px;
+    font-size: 60px;
+}
+
+.besucherInsgesamt {
     position: relative;
     z-index: -1;
-    top: -50px;
-    font-size: 20px;
+    font-size: 30px;
+}
+
+.heute{
+    font-size: 25px;
+    word-spacing: 7px;
+    font-family: "Calibri Light", "Courier New", monospace;
 }
 
 .watermark {
@@ -76,4 +84,13 @@ a {
     bottom: 10px;
     right: 10px;
     width: 150px;
+}
+
+.connected {
+    color: green;
+    visibility: hidden;
+}
+
+.disconnected {
+    color: red;
 }
