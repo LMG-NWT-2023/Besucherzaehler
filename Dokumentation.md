@@ -22,8 +22,6 @@ Soll-Ziel:
 Kann-Ziel: 
 * Die Messwerte möglichst auf allen Geräten in der Bücherei abrufbar machen.
 
-Ein automatisches Auswerten der Messwerte
-Des Weiteren entwarfen wir einen Projektplan, in dem wir alle anstehenden Aufgaben zeitlich einteilten zum allgemeinen Überblick unseres Projektes. Mit unserem von Frau Ehrler gestellten Budget von 250 Euro erstellten wir uns nun einen Kostenplan. Zunächst benötigten wir zwei Sensoren, einen Raspberry Pi, der uns als Computer dienen soll und evtl. Strom- und LAN-Kabel zur Installation in der Bücherei. Außerdem versuchten wir in einer Risikoanalyse zu veranschaulichen welche möglichen Risiken und Probleme während des Projektes uns zum Verhängnis werden könnten und welche Möglichkeit wir haben diesen vorausschauend aus dem Weg zu gehen. Dazu hatten wir noch die sinnvolle Idee Github zum gleichzeitigen Arbeiten, Austauschen von Daten und zur Projektübersicht zu nutzen.
 
 ## Funktionsweise
 
@@ -32,13 +30,13 @@ Auf dem Raspberry Pi läuft das Betriebssystem [Raspberry Pi OS Lite](https://ww
 Als Programmiersprache nutzen wir für den Besucherzähler JavaSkript und die Webseite HTML, CSS und JavaScript. Den gesamten Source Code inclusive Dokumentation haben wir auf Git Hub abgelegt. Dadurch können wir einfach den neusten Stand untereinander austauschen.
 
 Anfangs schrieben wir ein sehr einfaches Programm, das die Sensordaten auswertete und in die Konsole schrieb. Damit wir wissen ob eine Person die Bücherei betritt oder verlässt, benutzen wir zwei Sensoren. Je nach dem welcher Sensor als erstes aktiviert wird, wissen wir ob eine Person ein- oder austritt.
-Dieses Program funktionierte ziemlich gut für langsames ein- und austreten, jedoch fielen uns immer mehr Sonderfälle ein, mit denen unser Programm nicht umgehen konnte. Was passiert zum Beispiel, wenn eine Person den ersten Sensor aktiviert, dann aber umdreht und wieder zurückgeht? Oder was passiert, wenn aus irgendeinem Grund beide Sensoren gleichzeitig aktiviert werden?
+Dieses Program funktionierte ziemlich gut für langsames Ein- und Austreten, jedoch fielen uns immer mehr Sonderfälle ein, mit denen unser Programm nicht umgehen konnte. Was passiert zum Beispiel, wenn eine Person den ersten Sensor aktiviert, dann aber umdreht und wieder zurückgeht? Oder was passiert, wenn aus irgendeinem Grund beide Sensoren gleichzeitig aktiviert werden?
 Nach einiger Recherche haben wir uns für eine Statemachine entschieden, um mit den Sensorzuständen besser umzugehen.
 
 In der Datei "SensorStateMachine.js" erkennt man gut die einzelnen Zustände. Hier werden die Sensordaten ausgewertet und so die Besucher gezählt. Mit einem Test, der die verschiedenen Besuchereintritte simuliert, können wir bei Veränderungen einfach sehen, ob noch alles funktioniert.
 
 Jedes mal wenn sich die Besucherzahl ändert, wird der alte Wert in AktuellerStand.JSON überschrieben. Somit geht die Besucherzahl nicht verloren, wenn der Raspberry Pi mal ausgeht.
-Außerdem ist die Besucherzahl an das Datum gebunden und sobald ein neues Datum ist wird diese auf Null gesetzt.
+Außerdem ist die Besucherzahl an das Datum gebunden und sobald ein neues Datum ist, wird diese auf Null gesetzt.
 
 Der Raspberry Pi startet den Besucherzähler automatisch, sobald er hochgefahren ist.
 
@@ -66,12 +64,9 @@ Vo:     22 (GPIO 25)(orange)
 
 ## Statemachine
 
-Eine Statemachine kann verschiedene Zustände haben. Manche Zustände können nur erreicht werden, wenn ein bestimmter Zustand herrscht und dazu eine Bedingung erfüllt wird.
-Als Beispiel haben wir eine Pflanze die den Zustand „Samen“ hat. Wenn nun die Bedingung „Regen“ erfüllt wird, wechselt die Pflanze in den Zustand „Sprosse“.
-Durch diese Zustände und Bedingungen können sich Pfade entwickeln.
-Bei unserem Besucherzähler haben wir die Pfade „Eintreten“ und „Austreten“.
+Unsere Statemachine besteht aus zwei Pfaden „Eintreten“ und „Austreten“. Pro Pfad gibt es drei Zustände, um Ein- oder Austreten zu erkennen. Der vierte ist für die Zeitsperre notwendig. Die Inputs sind die Werte der Infrarotsensoren.
 
-Als wir dieses ganze Konzept in die Praxis umgesetzt hatten, ließen wir einige Tests laufen. Diese Testläufe liefen überraschend gut.
+![State Machine](./public/images/StateMachine.png)
 
 ## Webseite
 
