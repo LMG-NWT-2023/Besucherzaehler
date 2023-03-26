@@ -79,6 +79,8 @@ Wir haben uns außerdem noch dazu entschieden, die Möglichkeit einzubauen, die 
 
 Da es nicht möglich ist den Raspberry Pi nach unseren Vorstellungen ins Schul-Netzwerk einzubinden, entschlossen wir uns den Besucherzähler in einem eigenen Netzwerk zu betreiben. Dafür benutzen wir einen einfachen WLAN-Router.
 
+![State Machine](./public/images/Screenshot_Website.PNG)
+
 ## Installation
 
 Von Anfang an war klar, dass wir den Besucherzähler bzw. die zwei Sensoren an oder neben dem Türrahmen installieren wollen. Die wichtigste Frage, die wir uns dabei stellten war, in welcher Höhe wir sie anbringen sollen. Der Grund dafür waren die verschiedenen Personen die als Besucher erfasst werden sollen, z.B. kleine Kinder, große Männer, Eltern mit Kinderwägen, größere Personengruppen. Die Best mögliche Lösung erschien uns dafür ca. 30 cm über dem Boden.
