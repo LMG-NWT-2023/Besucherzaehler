@@ -92,14 +92,14 @@ Zudem hatten wir noch ein Problem den Raspberry Pi in ein Netwerk zu verbinden. 
 
 ## Fazit und Reflexion:
 
-Zusammenfassend kann man sagen, dass dieses Projekt positiv für uns verlaufen ist. Wir haben gelernt unsere Ideen zu gliedern, umzusetzen und uns eine Lösung zu überlegen, wenn etwas nicht so klappte, wie wir es uns vorstellten.
+Abschließend können wir sagen, dass dieses Projekt sehr positiv und nach unseren Zielen verlaufen ist. Wir haben einen Besucherzähler gebaut und somit geschafft ein Projekt so zu gestalten das es für den Benutzter einsetzbar und gut ist. Somit  haben wir alle Muss-, Soll- und Kannziele erfüllt.
+Jedoch unterschätzten wir dieses Projekt in seiner Komplexität und Länge und würden bei einer erneuten Durchführung dieses Projektes für das Programmieren eine größere Zeitspanne einplanen. Außerdem sollten wir dann unseren Projektstrukturplan immer konkret passend zum derzeitigen Stand machen um so einen besseren Überblick zu haben.
 
-Außerdem haben wir Erfahrungen fürs Leben in den Bereichen Teamarbeit und gemeinsames Zeitmanagement gesammelt, da wir uns oft nach unserem Projektplan richten mussten und Zeitfristen setzen und einhalten mussten. Wenn also etwas nicht in der vorgesehenen Zeit funktionierte, mussten wir uns schnellst möglich Lösungen überlegen und Prioritäten setzten.
+Insgesamt sind wir dennoch sehr zufrieden mit unseren verbauten Komponenten, da die Sensoren sehr einfach zu verstehen und bedienen waren und der RaspberryPi ohne Probleme als Computer diente. 
 
-Trotzdem hatten wir generell das Problem, dass wir bei jeder Entscheidung an unserem Besucherzähler immer sehr lange überlegen mussten, da wir nie wussten welche Idee und Umsetzungsart für den Besucherzähler im Endeffekt die Beste ist.
+Die Installation ist uns ebenfalls gut gelungen, weil der Besucherzähler aus dieser Position fehlerfrei zählt.
 
-Das Schreiben von Skripten, der Umgang mit JavaScript, CSS und HTML, so wie das praktische Zusammenbauen und Installieren war bei uns ebenfalls ein Punkt, bei dem wir dazulernen konnten, da wir viele Dinge während diesem Projekt ausprobiert, gebaut und uns ausgedacht haben, die wir normalerweise weniger ausüben.
+Würde man von diesem Punkt aus an dem Besucherzähler weiter arbeiten können, wäre es sinnvoll die analogen Werte weiter zu bearbeiten, da es hier noch Probleme gibt. Wenn man hier erreichen würde, das die Sensoren von einem viel weiteren Abstand messen, wie sie es jetzt schon tun, könnte man den Besucherzähler für größere Projekte erweitern
 
-Am meisten Spaß beim Arbeiten machte uns das kreative Lösen von Aufgaben und Hindernissen, die sich uns beim Entwickeln des Besucherzählers in den Weg stellten.
-Bei einem nächsten Projekt dieser Art sollten wir uns mehr Gedanken über die Wahl der Sensoren machen, da diese oft Probleme machten und man ständig den Programmcode abändern musste, dass sie auch wirklich die Besucher zählen.
-Außerdem wäre es hilfreich gewesen, zunächst Aufgaben klar zu verteilen und einen eigenen Arbeitsauftrag zu formulieren. Dies wäre für das nächste Projekt wichtig, da wir oft in die unnötige Situation kamen, dass alle Gruppenmitglieder dasselbe bearbeiteten und wir somit Zeit verschwendeten.
+Trotzdem war unser Projekt „Besucherzähler“sehr gut, da wir uns im Programmieren deutlich weiterentwickeln konnten und wir Programmieren und in Programmiersprachen wie JavaSkript lernen konnten. Die Aufgabenstellung war außerdem sehr passend für unsere Gruppe, aus dem Grund, dass wir uns alle für das Programmieren interessierten. Das Projekt stellte für uns alle eine Herausforderung und ein tolles Projekt dar.
+
