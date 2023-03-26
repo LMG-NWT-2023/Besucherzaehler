@@ -1,6 +1,6 @@
 const fs = require('fs')
-const ADS1115 = require('ads1115')
-const i2c = require('i2c-bus')
+
+
 
 const schwelleADWandler = 2000
 const intervallADWandler = 100  // Millisekunden
@@ -9,8 +9,11 @@ const {States, SensorStateMachine} = require('./SensorStateMachine')
 
 const FileNameAktuellerStand = 'AktuellerStand.json'
 const sensorStateMachine = new SensorStateMachine()
-
+var inDemoMode = false
 // Auslesen der Abstände über den Analog-Digital-Wandler ADS1115
+try {
+    const i2c = require('i2c-bus')
+    const ADS1115 = require('ads1115')
 
 i2c.openPromisified(1).then(async (bus) => {
 
@@ -33,8 +36,11 @@ i2c.openPromisified(1).then(async (bus) => {
     }, intervallADWandler)
   
   })
+} catch (error) {
+    console.log('hier gibt es keine Sensoren. Die Besucherzahlen werden gewürfelt')
+    inDemoMode = true
+}
 
-var inDemoMode = false
 /*
 // wenn wir nich auf dem Raspberry Pi laufen, nehmen wir einfach zufällige Werte
 
