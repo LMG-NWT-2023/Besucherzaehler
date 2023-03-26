@@ -79,7 +79,7 @@ Wir haben uns außerdem noch dazu entschieden, die Möglichkeit einzubauen, die 
 
 Da es nicht möglich ist den Raspberry Pi nach unseren Vorstellungen ins Schul-Netzwerk einzubinden, entschlossen wir uns den Besucherzähler in einem eigenen Netzwerk zu betreiben. Dafür benutzen wir einen einfachen WLAN-Router.
 
-![State Machine](./public/images/Screenshot_Website.PNG)
+![Webseite](./public/images/Screenshot_Website.PNG)
 
 ## Installation
 
