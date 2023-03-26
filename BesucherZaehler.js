@@ -3,7 +3,7 @@ const fs = require('fs')
 
 
 const schwelleADWandler = 2000
-const intervallADWandler = 100  // Millisekunden
+const intervallADWandler = 20  // Millisekunden
 
 const {States, SensorStateMachine} = require('./SensorStateMachine')
 
