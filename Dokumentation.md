@@ -24,7 +24,7 @@ Kann-Ziel:
 
 
 ## Funktionsweise
-[Test](https://github.com/LMG-NWT-2023/Besucherzaehler/blob/3adf1ad64ad9f2e391f9a9f76c6352893c094268/BesucherZaehler.js#L2)
+
 Auf dem Raspberry Pi läuft das Betriebssystem [Raspberry Pi OS Lite](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system), welches keine grafische Oberfläche beinhaltet. Diese wird auch nicht benötigt, weil die Entwicklung über das Netzwerk z.B. von Windows oder macOS aus erfolgt.
 
 Als Programmiersprache nutzen wir für den Besucherzähler JavaSkript und die Webseite HTML, CSS und JavaScript. Den gesamten Source Code inclusive Dokumentation haben wir auf Git Hub abgelegt. Dadurch können wir einfach den neusten Stand untereinander austauschen.
@@ -70,34 +70,29 @@ Unsere Statemachine besteht aus zwei Pfaden „Eintreten“ und „Austreten“.
 
 ## Webseite
 
-Nachdem wir eine gute Grundlage für das Zählen der Besucher hatten, starteten wir mit der Webseite. Grundidee war es, dass der Raspberry Pi und der Computer bzw. das Tablet im gleichen Netzwerk sind. Dafür haben wir einen eigenen Router, da wir das Schul-Netzwerk nicht wie geplant nutzen konnten. So kann man die Webseite, die auf dem Raspberry Pi läuft, von jedem Gerät im Netzwerk aus laden. Frau Ehrler kann diese Webseite auf ihrem Tablet aufrufen und die Besucherzahl sehen.
+Nachdem eine Grundlage für das Zählen der Besucher da war, wurde die Arbeit an der Webseite begonnen. Grundidee war es, dass der Raspberry Pi und das digitale Endgerät von Frau Ehrler im gleichen Netzwerk sind. Dafür benutzen wir einen eigenen Router. So kann man die Webseite, die auf dem Raspberry Pi läuft, von jedem Gerät im Netzwerk aus laden. Frau Ehrler kann diese Webseite auf ihrem Tablet aufrufen und die Besucherzahl sehen.
 
-Wir überlegten uns also was alles auf die Webseite muss. Schließlich haben wir die Webseite mit Besucherzahl, Leute die sich momentan in der Bibliothek befinden, Leute die die Bibliothek verlassen haben und Banner und Schullogo entworfen.
-
-
-Wir haben uns außerdem noch dazu entschieden, die Möglichkeit einzubauen, die Werte manuell zu korrigieren, für den Fall, dass der Besucherzähler einen Fehler gemacht hat.
-
-Da es nicht möglich ist den Raspberry Pi nach unseren Vorstellungen ins Schul-Netzwerk einzubinden, entschlossen wir uns den Besucherzähler in einem eigenen Netzwerk zu betreiben. Dafür benutzen wir einen einfachen WLAN-Router.
+Die Webseite enthält Besucherzahl, Anzahl der Leute die sich momentan in der Bibliothek befinden, Anzahl der Leute die die Bibliothek verlassen haben, Banner und Schullogo.
 
 ![Webseite](./public/images/Screenshot_Website.PNG)
 
 ## Installation
 
-Von Anfang an war klar, dass wir den Besucherzähler bzw. die zwei Sensoren an oder neben dem Türrahmen installieren wollen. Die wichtigste Frage, die wir uns dabei stellten war, in welcher Höhe wir sie anbringen sollen. Der Grund dafür waren die verschiedenen Personen die als Besucher erfasst werden sollen, z.B. kleine Kinder, große Männer, Eltern mit Kinderwägen, größere Personengruppen. Die Best mögliche Lösung erschien uns dafür ca. 30 cm über dem Boden.
+Geplant war, dass wir den Besucherzähler bzw. die zwei Sensoren an oder neben dem Türrahmen installieren wollen. Die wichtigste Frage, die wir uns dabei stellten war, in welcher Höhe wir sie anbringen sollen. Der Grund dafür waren die verschiedenen Personen die als Besucher erfasst werden sollen (kleine Kinder, große Personen, Eltern mit Kinderwägen, größere Personengruppen). Die optimalste Lösung erschien uns dafür den Sensor in ca. 30 cm Höhe anzubringen.
 
-Den an die Sensoren angeschlossenen Raspberry Pi wollten wir nun, zusammen mit dem Router auf den Boden neben der Tür in einer Holzbox legen. Somit ist alles kompakt und sicher angebracht. Bei einem Installationsversuch, bei dem wir die Sensoren an der beschriebenen Stelle prüfungsweise anbrachten, zählte der Besucherzähler drei echte Besucher. Dies gab uns die Versicherung, die richtige Stelle gefunden zu haben
+Den an die Sensoren angeschlossenen Raspberry Pi wollten wir zusammen mit dem Router auf den Boden neben der Tür in einer Holzbox legen. Somit ist alles kompakt und sicher angebracht.
 
 
 ## Schwierigkeiten
 
-Ein anfangs großes Problem, welches beim Auslesen der Sensordaten auftrat war, dass die Werte der Sensoren beim Durchlaufen einer Person stark flackerten. Als Lösung bauten wir eine 1-Sekunden Sperre ein, die nach einem Ein- oder Austritt einsetzt. So kommt es nicht mehr zu dem Problem, dass der Besucherzähler pro Durchlauf mehr als eine Person zählt.
+Ein anfangs großes Problem, welches beim Auslesen der Sensordaten auftrat war, dass die Werte der Sensoren beim Durchlaufen einer Person stark flackerten. Als Lösung bauten wir eine [1-Sekunden Sperre](https://github.com/LMG-NWT-2023/Besucherzaehler/blob/8ca4bfdfd58c6d24f514d48bd6c5c3b30fde6301/SensorStateMachine.js#L62) ein, die nach einem Ein- oder Austritt einsetzt. So kommt es nicht mehr zu dem Problem, dass der Besucherzähler pro Durchlauf mehr als eine Person zählt.
 
-Ein weiteres Problem ist bei der Netzwerk für die Webseite aufgekommen. Unser Ziel war es das Schul-Netzwerk dafür zu nutzen, doch das ist leider nicht möglich, da das Schul-Netzwerk segmentiert ist. Deshalb haben wir einen eigenen Router gekauft, der das Netzwerk aufbaut. In diesem sind der Raspberry Pi und Frau Ehrlers Tablet. Der Nachteil ist, dass sie mit dem Tablet keinen Internet Zugriff mehr hat, weshalb sie nicht den Computer zum Anzeigen nutzt.
+Zudem hatten wir noch ein Problem den Raspberry Pi in ein Netwerk zu verbinden. Unser Ziel war es das Schul-Netzwerk dafür zu nutzen, doch das ist nicht möglich, da das Schul-Netzwerk segmentiert ist. Deshalb haben wir einen eigenen Router gekauft, welcher das Netzwerk aufbaut. In diesem sind der Raspberry Pi und ein Tablet in aus der Bücherei verbunden. Der Nachteil ist, dass Frau Ehrler mit dem Tablet keinen Internet Zugriff hat, weshalb sie nicht den Computer zum Anzeigen nutzten kann.
 
 
 ## Fazit und Reflexion:
 
-Abschließend und zusammenfassend können wir sagen, dass dieses Projekt sehr positiv für uns verlaufen ist. Wir haben gelernt unsere Ideen zu gliedern, umzusetzen und uns eine Lösung zu überlegen, wenn etwas nicht so klappte, wie wir es uns vorstellten.
+Zusammenfassend kann man sagen, dass dieses Projekt positiv für uns verlaufen ist. Wir haben gelernt unsere Ideen zu gliedern, umzusetzen und uns eine Lösung zu überlegen, wenn etwas nicht so klappte, wie wir es uns vorstellten.
 
 Außerdem haben wir Erfahrungen fürs Leben in den Bereichen Teamarbeit und gemeinsames Zeitmanagement gesammelt, da wir uns oft nach unserem Projektplan richten mussten und Zeitfristen setzen und einhalten mussten. Wenn also etwas nicht in der vorgesehenen Zeit funktionierte, mussten wir uns schnellst möglich Lösungen überlegen und Prioritäten setzten.
 
@@ -108,5 +103,3 @@ Das Schreiben von Skripten, der Umgang mit JavaScript, CSS und HTML, so wie das 
 Am meisten Spaß beim Arbeiten machte uns das kreative Lösen von Aufgaben und Hindernissen, die sich uns beim Entwickeln des Besucherzählers in den Weg stellten.
 Bei einem nächsten Projekt dieser Art sollten wir uns mehr Gedanken über die Wahl der Sensoren machen, da diese oft Probleme machten und man ständig den Programmcode abändern musste, dass sie auch wirklich die Besucher zählen.
 Außerdem wäre es hilfreich gewesen, zunächst Aufgaben klar zu verteilen und einen eigenen Arbeitsauftrag zu formulieren. Dies wäre für das nächste Projekt wichtig, da wir oft in die unnötige Situation kamen, dass alle Gruppenmitglieder dasselbe bearbeiteten und wir somit Zeit verschwendeten.
-
-Trotzdem war es alles in allem ein sehr schönes Projekt bei dem man viel für die Zukunft lernen konnte. Die Aufgabenstellung war außerdem sehr passend für unsere Gruppe, aus dem Grund, dass wir uns alle für das Programmieren interessierten. Das Projekt, einen Besucherzähler zu bauen, stellte für uns alle eine Herausforderung und ein tolles Projekt dar.
