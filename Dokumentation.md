@@ -24,7 +24,7 @@ Kann-Ziel:
 
 
 ## Funktionsweise
-
+[Test](https://github.com/LMG-NWT-2023/Besucherzaehler/blob/3adf1ad64ad9f2e391f9a9f76c6352893c094268/BesucherZaehler.js#L2)
 Auf dem Raspberry Pi läuft das Betriebssystem [Raspberry Pi OS Lite](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system), welches keine grafische Oberfläche beinhaltet. Diese wird auch nicht benötigt, weil die Entwicklung über das Netzwerk z.B. von Windows oder macOS aus erfolgt.
 
 Als Programmiersprache nutzen wir für den Besucherzähler JavaSkript und die Webseite HTML, CSS und JavaScript. Den gesamten Source Code inclusive Dokumentation haben wir auf Git Hub abgelegt. Dadurch können wir einfach den neusten Stand untereinander austauschen.
