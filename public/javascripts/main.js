@@ -21,6 +21,6 @@ socket.on('BesucherZaehler', (zaehlerStand) => {
     // console.log(zaehlerStand)    
     elementBesucher.innerText = zaehlerStand.besucher
     elementMomentan.innerText = zaehlerStand.momentan
-    elementAusgetreten.innerText = zaehlerStand.ausgetreten
+    // elementAusgetreten.innerText = zaehlerStand.ausgetreten
     elementHeute.innerText = zaehlerStand.heute
 })
