@@ -37,8 +37,10 @@ i2c.openPromisified(1).then(async (bus) => {
   
   })
 } catch (error) {
-    console.log('hier gibt es keine Sensoren. Die Besucherzahlen werden gewürfelt')
-    inDemoMode = true
+    console.log('Hier gibt es keine Sensoren. Die Besucherzahl erhöht sich alle 5s.')
+    setInterval(() => {
+        sensorStateMachine.incrEingetreten()
+    }, 5000)
 }
 
 /*
@@ -122,54 +124,27 @@ class BesucherZaehler{
     
     setSocketIO(io) {
         this.socketIO = io
-
-        if (inDemoMode) {
-            setInterval(() => {
-                const zaehlerStand = this.randomBesucher()
-                console.log(`random Zählerstand: ${zaehlerStand.besucher}`)
-                this.socketIO.emit('BesucherZaehler', zaehlerStand)
-            }, 2000)
-        } else {
-            sensorStateMachine.onChange( (zaehlerStand)=> {
-                console.log(`neuer Zählerstand: ${zaehlerStand.besucher}`)
-                this.socketIO.emit('BesucherZaehler', zaehlerStand)
-                // schreibe Aktuellen Stand in Datei, damit wir beim Neustart die Werte aufrufen können
-                const aktuellerStand = JSON.stringify(zaehlerStand)
-                fs.writeFile(FileNameAktuellerStand, aktuellerStand, (err) => {
-                    if (err) {
-                        console.log(`Schreiben des aktuellen Standes fehlgeschlagen: ${err}`)
-                    }
-                })
+        sensorStateMachine.onChange( (zaehlerStand)=> {
+            console.log(`neuer Zählerstand: ${zaehlerStand.besucher}`)
+            this.socketIO.emit('BesucherZaehler', zaehlerStand)
+            // schreibe Aktuellen Stand in Datei, damit wir beim Neustart die Werte aufrufen können
+            const aktuellerStand = JSON.stringify(zaehlerStand)
+            fs.writeFile(FileNameAktuellerStand, aktuellerStand, (err) => {
+                if (err) {
+                    console.log(`Schreiben des aktuellen Standes fehlgeschlagen: ${err}`)
+                }
             })
-        }
+        })       
     }
     
     sendeAktuellenStand() {
-        if (!inDemoMode && this.socketIO) {
+        if (this.socketIO) {
             this.socketIO.emit('BesucherZaehler', sensorStateMachine.aktuellerStand())
         }
     }
 
-    randomBesucher() {
-        const eingetreten = Math.floor(Math.random() * 15) + 4;
-        const ausgetreten = Math.floor(Math.random() * eingetreten);
-        return {
-            besucher: eingetreten,
-            momentan: eingetreten - ausgetreten, 
-            ausgetreten: ausgetreten,
-            heute: "1.03.2023"
-        }
-    }
-
     aktuellerStand() {
-        var zaehlerStand
-        if (inDemoMode){
-            zaehlerStand = this.randomBesucher()
-        } else {
-            zaehlerStand = sensorStateMachine.aktuellerStand()
-        }
-
-        return zaehlerStand
+        return sensorStateMachine.aktuellerStand()
     }
 }
 
